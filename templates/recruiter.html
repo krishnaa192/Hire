@@ -1,0 +1,15 @@
+<!-- candidates/templates/candidates/signup.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Recruiter Profile</h1>
+    <form method="post" action="" enctype="multipart/form-data">
+ {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>

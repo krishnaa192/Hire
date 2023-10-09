@@ -1,0 +1,19 @@
+<!-- candidates/templates/candidates/login.html -->
+
+{% load static %}   
+{% block css %}
+    
+    <link rel="stylesheet" href="{% static 'style/sgn.css' %}">
+{% endblock %}
+{% block content %}
+<nav class="navbar">
+    <div class="nav-title"> <a href="{% url 'welcome' %}">Hire</a></div>
+    
+   
+    <form method="post">
+        <h1>Candidate Login</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+{% endblock %}

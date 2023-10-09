@@ -1,0 +1,102 @@
+{% load static %}
+
+{% block css %}
+
+
+<link rel="stylesheet" href="{% static 'style/hire.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock %}
+{% block content %}
+<nav class="navbar">
+  <div class="nav-title">Hire</div>
+  <div class="nav-content">
+    <div class="nav-items">
+      <div class="nav-item"><a href="{% url 'home' %}">Home</a></div>
+      <div class="nav-item"><a href="{% url 'about' %}">About us</a></div>
+      <!-- <div class="nav-item"><a href="{% url  'login' %}">Login</a></div>
+      <div class="nav-item"><a href="{% url 'signup' %}">Sign up</a></div> -->
+      <div class="nav-item"><a href="{% url 'logout' %}">Logout</a></div>
+    </div>
+<form action="" method="get">
+    <div class="nav-search">
+      
+      <input type="text"  name="q" placeholder="Search..." value="{{ request.GET.q }}">
+       <li><a href=""><i class="fa fa-search"></i></a></li>
+    </div>
+</form>
+
+</nav>
+<h1>Recent Job posting</h1>
+
+<div class="sort-dropdown">
+  <form method="get">
+    <span class="sort-label">Sort by:</span>
+    <select name="sort" class="sort-select" id="sortSelect">
+      <option value="">Sort by</option>
+      <option value="experience_asc">Experience (Ascending)</option>
+      <option value="experience_desc">Experience (Descending)</option>
+      <option value="salary_asc">Salary (Ascending)</option>
+      <option value="salary_desc">Salary (Descending)</option>
+      <option value="posted_on_asc">Posted On (Ascending)</option>
+      <option value="posted_on_desc">Posted On (Descending)</option>
+      <option value="Bengalore">Bengalore</option>
+      <option value="Mumbai">Mumbai</option>
+      <option value="Delhi">Delhi</option>
+    </select>
+    <button class="sort-button" onclick="sortCards()">Sort</button>
+</div>
+</form>
+<div class="job-cards">
+  {% for job in jobs %}
+  <div class="recruitment-card">
+    <div class="header">
+      <h2>{{job.title}}</h2>
+    </div>
+    <div class="content">
+      <img class="logo-preview" src="{{job.recruiter.logo.url}}" alt="Company Logo Preview">
+      <p><strong>Company:</strong> {{job.recruiter.company_name}}</p>
+      <p><strong>Location:</strong> {{job.location}}</p>
+      <p><strong> Required Experience:</strong>{{job.experience}} years </p>
+      <p><strong>Skills:</strong> {{job.skills.name}}</p>
+      <p><strong>Posted:</strong>{{job.posted_on}}</p>
+      <p><strong> job_description</strong>{{job.job_description}} </p>
+      <p><strong> salary</strong>{{job.ctc}}</p>
+      <p><strong> job_type</strong>{{job.job_type}} </p>
+    </div>
+    <div class="footer">
+      <button class="apply-btn"> <a href="{%   url 'apply_job' job.pk %}">Apply Now </a></button>
+      <button class="apply-btn"> <a href="{%   url 'job_detail' job.pk %}">View Details </a> </button>
+    </div>
+  </div>
+  {% endfor %}
+
+</div>
+
+  <div class="section">
+    <h2>Why Choose Us</h2>
+    <ul>
+      <li>Trusted by top companies worldwide</li>
+      <li>Expertise in hiring tech professionals</li>
+      <li>Seamless and efficient recruitment process</li>
+      <li>Connnected over 10000+ startups</li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <a href="#">About Us</a>
+    <a href="#">Contact Us</a>
+    <a href="#">Privacy Policy</a>
+    <a href="#">Terms of Service</a>
+    <!-- Add more footer links as needed -->
+    <div class="social-icons">
+      <a href="#" target="_blank"><i class="fa fa-facebook-f"></i></a>
+      <a href="#" target="_blank"><i class="fa fa-twitter"></i></a>
+      <a href="#" target="_blank"><i class="fa fa-instagram"></i></a>
+      <!-- Add more Font Awesome icons for other social media as needed -->
+    </div>
+    <p>&copy; 2023 Your Recruitment Startup. All rights reserved.</p>
+  </div>
+  {% endblock %}
+  {% block js %}
+  <script src="{% static 'js/hire.js' %}"></script>
+  {% endblock %}

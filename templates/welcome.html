@@ -1,0 +1,17 @@
+
+{% load static %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'style/welcome.css' %}">
+{% endblock %}
+{% block content %}
+<header class="header">
+    <h1>Hire</h1>
+  </header>
+<div class="container">
+    <h1>Welcome to our Hire ,we care for your future!</h1>
+    <div class="options">
+      <a href="{% url 'login' %}" class="btn">Login</a>
+      <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+    </div>
+    </div>
+    {% endblock %}
