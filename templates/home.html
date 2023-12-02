@@ -29,6 +29,9 @@
                                         <option value="Bengalore">Bengalore</option>
                                         <option value="Mumbai">Mumbai</option>
                                         <option value="Delhi">Delhi</option>
+                                        <option value="Chennai">Chennai</option>
+                                        <option value="Kolkata">Kolkata</option>
+                                        <option value="Lucknow">Lucknow</option>
                                     </select>
                                 </div>
                             </div>
@@ -50,11 +53,11 @@
                 <h1 class="text-center mb-5 wow fadeInUp" data-wow-delay="0.1s">Explore By Category</h1>
               
                 <div class="row g-4">
-                    {%for cat in category %}
+                    {%for cats in category %}
                     <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <a class="cat-item rounded p-4" href="">
+                        <a class="cat-item rounded p-4" href="{% url 'web_dev' cat=cats.category %}">
                             <i class="fa fa-3x fa-mail-bulk text-primary mb-4"></i>
-                            <h6 class="mb-3">{{ cat.category}}</h6>
+                            <h6 class="mb-3">{{ cats.category}}</h6>
                         </a>
                     </div>
                     {% endfor %}

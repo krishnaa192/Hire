@@ -1,0 +1,261 @@
+.nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+
+  
+}
+.nav ul{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  
+}
+
+.nav li{
+    font-size: 20px;
+    font-weight: bold;
+    list-style-type: none;
+    padding-right: 12rem;
+}
+a{
+    text-decoration: none;
+  /* color: white; */
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: black;
+}
+   
+/* job description */
+.job{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 4rem;
+   
+}
+.job-desc{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #e6e6e6;
+    width: 80%;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+   
+}
+.job-title{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border: 2px solid #e6e6e6;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+    
+}
+.job-title h1{
+    font-size: 20px;
+    font-weight: bold;
+    
+}
+.job-intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+   
+    
+}
+.job-intro ul{
+    display: flex;
+    flex-direction: row;
+    /* justify-content:space-around; */
+    /* align-items: center; */
+    list-style-type: none;
+    padding-right: 2rem;
+    
+   
+}
+.job-intro li{
+    padding-right: 2rem;
+}
+span{
+    color:red;
+}
+
+.job-detail ul {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+.job-detail ul  li{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+}
+.job-detail-btn{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  
+}
+.job-detail-btn button{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2f3e46;
+    color: white;
+    border: none;
+}
+.sheet{
+
+    width: 100%;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #e6e6e6;
+    box-shadow: 0 0 45px rgba(0, 0, 0, .08);
+
+}
+.sheet-column ul,.user-data-i ul{ 
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+   border: 1px solid #e6e6e6;
+    list-style: none;
+    
+
+}
+.sheet-column ul li{
+    display: flex;
+    width: 14.5vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    font-weight: bold;
+    font-size: 14px;
+    
+}
+.user-data-i ul li{
+    display: flex;
+    width: 14.5vw;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 8vh;
+    font-family: 12px;
+    
+
+}
+.user-data-i{
+    margin: -13px -6px -11px -97px;
+    
+}
+.sheet-column{
+    margin: -13px -6px -11px -97px;
+}
+i{
+    color: #2f3e46;
+    font-size: 20px;
+}
+.user-data-i ul li a{
+    color: blue;
+    cursor:pointer;
+}
+.action-button{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.action-button button{
+    margin-right: 2rem;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #2f3e46;
+    color: white;
+    border: none;
+}
+.action-button button a{
+    color: white;
+    text-decoration: none;
+}
+.pagination ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.pagination ul li{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid #e6e6e6;
+    margin-right: 1rem;
+    cursor: pointer;
+}
+/* search */
+.search-box{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+    margin-right: 2rem;
+}   
+.search-box input{
+    padding: 14px;
+    width: 30vw;
+    height: 2vh;
+    border-radius: 5px;
+    border: 2px solid #e6e6e6;
+    margin-right: 10px;
+}
+.search-box button{
+    padding: 6px 12px 15px 12px;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+   
+    border: none;
+    font-size: 12px!important;
+    cursor: pointer;
+}
+
+.sort select{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #e6e6e6;
+    color: white;
+    border: 2px solid #e6e6e6;
+    color: black;
+    margin-right: 10px;
+    width: 10vw;
+}

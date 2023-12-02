@@ -1,6 +1,18 @@
+{% block css%}
+
+<link rel="stylesheet" href="../static/style/project.css">
+{% endblock%}
+{% block body %}
+
+<div class="forms">
+    <div class="box">
+    <h1>Add Project </h1>
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Create Profile</button>
-
+    <button> <a href="">Back</a></button>
 </form>
+</div>
+</div>
+{% endblock %}

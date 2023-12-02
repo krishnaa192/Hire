@@ -1,0 +1,250 @@
+{% load static %}
+{% block css%}
+<link href="../static/style/profilepage.css" rel="stylesheet">
+{% endblock %}
+{% block body%}
+{% include 'header.html' %}
+<div class="bg">
+    <img src="../static/img/job.jpg" alt="">
+</div>
+<div class="image">
+    <img src="{{applicant.profile_pic.url}}" alt="Nice">
+    <!-- <i class="fas fa-upload">  </i> -->
+    <i class="fas fa-camera upload-icon"></i> 
+    
+    <!-- <a href="https://karanrupadhyay.github.io/Portfolio/"> Portfolio</a> -->
+</div>
+<div class="personal">
+    <h2>Personal Details  <a href="{% url 'updateApplicant' %}" class="edit-link"><i class="fas fa-edit"></i></a></h2>
+    <div class="personal-main">
+        <div class="personal-element1">
+            <ul>
+                <li>
+                    Date of Birth: <span> 12/12/1999</span>
+                <li>
+                    Name: <span>{{profile.name}}</span>
+                </li>
+                <li>
+                    Email: <span>{{profile.email}} </span>
+                </li>
+                <li>
+                    Bio: <span>{{applicant.bio}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="personal-element2">
+            <ul>
+                <li>
+                    Location:<span>{{applicant.city}} </span>
+                </li>
+                <li>
+                    Highest Qualification <span>{{applicant.highest_qualification}}</span>
+                </li>
+                <li>
+                    Gmail: <span>{{profile.email}} </span>
+                </li>
+                <li>
+                    Address: <span>{{applicant.address}},{{applicant.city}} </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="skill">
+    <h2>Skills</h2>
+    <div class="search-add">
+        <form action="{% url 'add_skill' %}" method="POST">
+            {% csrf_token %}
+        <input type="text" id="skill-search"  name="name" placeholder="Search skills" required id="id_nam">
+      <button  id="add-skill">  <i class="fas fa-solid fa-plus"></i> </button>
+        </form>
+    </div>
+    <div class="skill-main">
+        <ul class="skill-list">
+            {% for skills in skill %}
+            <li>
+                {{skills.name}}
+                <button class="remove-skill"><a href="{% url 'delete_skill' skills.pk %}" >X </a></button>
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+
+    <div class="education">
+        <h2>Education    <a href="{% url 'add_education' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
+        <div class="education-main">
+            {% for educations in education %}
+            <div class="education-element1">
+
+                <ul>
+
+                    <a href="{% url 'update_education' educations.pk %}" class="edit-link"><i class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_education' educations.pk %}" class="delete-link"><i class="fas fa-trash-alt"></i></a>
+                    <li>
+                        <div class="text">Degree:</div> {{educations.degree}}
+                    </li>
+                    <li>
+                        <div class="text">College:</div> {{educations.college}}
+                    </li>
+                    <li>
+                        <div class="text">Board or university:</div> {{educations.board_or_university}}
+                    </li>
+                    <li>
+                        <div class="text">Year of passing:</div> {{educations.passing_year}}
+                    </li>
+                    <li>
+                
+
+            </div>
+            {% endfor %}
+        </div>
+        <div class="projects">
+            <h2>Projects  <a href="{% url 'add_project' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
+            <div class="projects-main">
+                {% for projects in project %}
+                <div class="projects-element1">
+                    <ul>
+                        <a href="{% url 'update_project' projects.pk %}" class="edit-link"><i class="fas fa-edit"></i></a>
+                        <a href="{% url 'delete_project' projects.pk %}" class="delete-link"><i class="fas fa-trash-alt"></i></a>
+                        <li>
+                            <div class="text">Project Name:</div> {{projects.name}}
+                        </li>
+                        <li>
+                            <div class="text">Description::</div> {{projects.description}}
+                        </li>
+                        <li>
+                            <div class="text">Start Date:</div> {{projects.start_date}}
+                        </li>
+                        <li>
+                            <div class="text">Currenty working:</div> {{projects.currently_working}}
+                        </li>
+                        <li>
+                            <div class="text">End Date:</div> {{projects.end_date}}
+                        </li>
+                        <li>
+                            <div class="text">Git Link:</div> {{projects.git_link}}
+                        </li>
+                        <li>
+                            <div class="text">Link2:</div> {{projects.link2}}
+                        </li>
+
+                    </ul>
+                </div>
+                {% endfor %}
+
+
+            </div>
+            <div class="contacts">
+                <h2>Contacts  <a href="{% url 'add_link' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
+                <div class="contacts-main">
+                    <div class="contacts-element1">
+                        <ul
+                            {% for links in link %}
+                            <li>
+                                <div class="text">{{links.name}}:</div> {{links.link}}   
+                                <button class="remove-skill"><a href="{% url 'delete_link' links.pk %}" >X </a></button>
+                            </li>
+                            {% endfor %}
+                           
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement">
+                <h2>Achievements</h2>
+                <div class="achievement-main">
+                    <div class="achievement-element1">
+                        <ul>
+                            <li>
+                                <i class="fas fa-circle"></i>: Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Dolores nam architecto dicta ipsum cum nihil illum.
+                            </li>
+                            <li>
+                                <i class="fas fa-circle"></i>: Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Dolores nam architecto dicta ipsum cum nihil illum.
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!-- Footer Start -->
+            <div class="container-fluid bg-dark text-white-50 footer pt-5 mt-5 wow fadeIn" data-wow-delay="0.1s">
+                <div class="container py-5">
+                    <div class="row g-5">
+                        <div class="col-lg-3 col-md-6">
+                            <h5 class="text-white mb-4">Company</h5>
+                            <a class="btn btn-link text-white-50" href="">About Us</a>
+                            <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                            <a class="btn btn-link text-white-50" href="">Our Services</a>
+                            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h5 class="text-white mb-4">Quick Links</h5>
+                            <a class="btn btn-link text-white-50" href="">About Us</a>
+                            <a class="btn btn-link text-white-50" href="">Contact Us</a>
+                            <a class="btn btn-link text-white-50" href="">Our Services</a>
+                            <a class="btn btn-link text-white-50" href="">Privacy Policy</a>
+                            <a class="btn btn-link text-white-50" href="">Terms & Condition</a>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h5 class="text-white mb-4">Contact</h5>
+                            <p class="mb-2"><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
+                            <p class="mb-2"><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
+                            <p class="mb-2"><i class="fa fa-envelope me-3"></i>info@example.com</p>
+                            <div class="d-flex pt-2">
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i
+                                        class="fab fa-facebook-f"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-youtube"></i></a>
+                                <a class="btn btn-outline-light btn-social" href=""><i
+                                        class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <h5 class="text-white mb-4">Newsletter</h5>
+                            <p>Dolor amet sit justo amet elitr clita ipsum elitr est.</p>
+                            <div class="position-relative mx-auto" style="max-width: 400px;">
+                                <input class="form-control bg-transparent w-100 py-3 ps-4 pe-5" type="text"
+                                    placeholder="Your email">
+                                <button type="button"
+                                    class="btn btn-primary py-2 position-absolute top-0 end-0 mt-2 me-2">SignUp</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="copyright">
+                        <div class="row">
+                            <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                                &copy; <a class="border-bottom" href="#">Your Site Name</a>, All Right Reserved.
+
+                                <!--/*** This template is free as long as you keep the footer author’s credit link/attribution link/backlink. If you'd like to use the template without the footer author’s credit link/attribution link/backlink, you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". Thank you for your support. ***/-->
+                                Designed By <a class="border-bottom" href="https://htmlcodex.com">HTML Codex</a>
+                            </div>
+                            <div class="col-md-6 text-center text-md-end">
+                                <div class="footer-menu">
+                                    <a href="">Home</a>
+                                    <a href="">Cookies</a>
+                                    <a href="">Help</a>
+                                    <a href="">FQAs</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+            <script src="../static/lib/wow/wow.min.js"></script>
+            <script src="..static/lib/easing/easing.min.js"></script>
+            <script src="..static/lib/waypoints/waypoints.min.js"></script>
+            <script src="..static/lib/owlcarousel/owl.carousel.min.js"></script>
+            <!-- Template Javascript -->
+            <script src="../static/js/main.js"></script>
+            {% endblock %}

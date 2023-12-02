@@ -38,14 +38,6 @@ class CandidateForm(forms.ModelForm):
         }
           
         # fields = ['phone', 'experience', 'current_ctc', 'expected_ctc', 'graduated_from', 'degree', 'skills', 'resume']
-class RecruiterForm(forms.ModelForm):
-    class Meta:
-        model = Recruiter
-        # fields = '__all__'
-        fields = ['is_recruiter','is_applicant' ,'company_name', 'logo', 'about_company', 'company_address', 'company_website', 'company_email', 'recruting_face','grade']
-        widgets = {
-            'is_applicant': HiddenInput()
-        }
 
 class ApplyForm(forms.ModelForm):
     class Meta:
@@ -58,11 +50,6 @@ class ApplyForm(forms.ModelForm):
             'profile': forms.HiddenInput(),
         }
 
-class JobForm(forms.ModelForm):
-    class Meta:
-        model = Job
-
-        exclude = ['recruiter']
 
 class ApplicantProfileForm(forms.ModelForm):
     class Meta:
@@ -78,4 +65,27 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = ['profile']
+
+
+
+
+class SkillForm(forms.ModelForm):
+    class Meta:
+        model = Skill
+        exclude = ['profile','level']
        
+class AddLinkForm(forms.ModelForm):
+    class Meta:
+        model = addLink
+        exclude = ['profile']
+
+class ExperienceForm(forms.ModelForm):
+    class Meta:
+        model = Experience
+        exclude = ['profile']
+
+class SendMessageForm(forms.ModelForm):
+    class Meta:
+        model = Message
+        fields = [ 'receiver', 'subject', 'message']
+        

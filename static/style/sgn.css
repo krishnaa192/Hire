@@ -3,8 +3,6 @@ body {
     display: inline-block;
     
    }
-   
-   
    .main a{
    
      text-decoration: none;
@@ -15,6 +13,7 @@ body {
         margin: 0px 0px 0px 95px;
         padding: 40px 0px 0px 0px;
    }
+   
    form 
    { 
     /* border: 3px solid #f1f1f1;  */

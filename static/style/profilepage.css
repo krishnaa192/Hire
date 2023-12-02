@@ -1,0 +1,324 @@
+
+ .profile-main h1{
+    color: Black;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Times New Roman', Times, serif;
+    align-items: center;
+    background-color: pink; 
+    border: 2px solid black;
+}
+.image img{
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin:-227px 0px 0px 395px;
+    /* margin-top: 5%; */
+    border: 2px solid black;
+
+}
+.image{
+    background-color:#748cab;
+    height:76px;
+    width:80%;
+    margin: -16px 0px 0px 132px;
+    border-radius: 20px;
+}
+.image i{
+    font-size: 20px;
+    color: white;
+    margin: 0px 0px 0px -230px;
+   
+}
+.bg img{
+    height:280px;
+    width:80%;
+    background-color:rgb(255, 0, 221);
+ margin: 0px 0px 0px 132px;
+}
+.personal-main{
+    display: flex;
+}
+.personal-element1{
+    width: 50%;
+    height: 76px;
+    margin: 0px 0px 0px 130px; 
+    border-radius: 5px;
+    height: 260px;
+}
+.personal-element2{
+    width: 50%;
+
+    height: 76px;
+    margin: 0px 132px 0px 0px; 
+    border-radius: 5px;
+    height: 260px;
+
+}
+.personal h2, .skill h2, .education h2, .experience h2, .project h2, .contact{
+    background-color: #748cab;
+
+    width: 80%;
+    margin: 16px 0px 16px 132px;
+    border-radius: 5px;
+    text-align: center;
+}
+.personal-element1 ul li, .personal-element2 ul li,  .education-element1 ul li, .experience ul li, .project ul li, .contact ul li{
+    list-style: none;
+    font-size: 14px;
+ 
+    padding: 12px 0px 0px 10px;
+
+}
+/* span{
+    display: inline-block;
+ 
+    font-size: 16px;
+    padding: 0px 0px 0px 32px;
+    margin: -23px 0px 0px 0px;
+    border-bottom: 1px solid #ddd;
+    width: 80%;
+} */
+
+.skill-main{
+  padding: 0px 0px 0px 132px;
+  
+}
+
+
+
+
+.skill-list {
+    list-style: none;
+    padding: 0;
+}
+
+.skill-list li {
+    display: flex;
+    /* justify-content: space-between; */
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.remove-skill {
+    background-color: transparent;
+    border: none;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 0;
+    margin-left: 10px;
+}
+.search-add {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    width: 30%;
+    margin: 0 auto;
+}
+
+#skill-search {
+    flex-grow: 1;
+    
+}
+input[type="text"] {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 16px;
+    flex-grow: 1;
+  
+}
+
+#add-skill {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+/* Style for the Personal Details section */
+.personal {
+    background-color: #f8f8f8;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.personal h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Style for the two main elements within the Personal Details section */
+.personal-main {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Style for the left-side personal element */
+.personal-element1,
+.personal-element2 {
+    flex: 1;
+    padding: 10px;
+}
+
+.personal-element1 ul,
+.personal-element2 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.personal-element1 li,
+.personal-element2 li {
+    margin-bottom: 10px;
+}
+
+/* Style for labels (e.g., Name, Email) */
+.personal-element1 li::before,
+.personal-element2 li::before {
+    content: attr(data-label);
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+
+.personal-element1 span,
+.personal-element2 span {
+    color: #007bff; /* Blue color for the text within spans */
+}
+
+
+.personal-element1 li[data-label="Bio"] span,
+.personal-element2 li[data-label="Address"] span {
+    display: block;
+    font-style: italic;
+    color: #666;
+    display: inline-block;
+    max-height: 100px; /* Set a maximum height for the boxes */
+    overflow: auto; /* Add a scrollbar for overflow content */
+    padding: 5px; /* Add padding for better readability */
+    border: 1px solid #ddd; /* Add a border for distinction */
+}
+
+.education-main {
+    /* background-color: #f8f8f8; */
+    display: flex;
+    flex-direction: row;
+    width:auto;
+    padding:0px 0px 0px 130px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.text {
+    font-weight: bold; /* Make the text bold */
+    color: #007bff; /* Highlight the text with blue color */
+    margin-right: 5px; /* Add a small margin to the right of the text */
+    display: inline; /* Display the text inline with content */
+}
+
+
+.education-element1 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.education-element1 li {
+    margin-bottom: 10px;
+}
+.education-element1{
+    flex: 0 1 calc(50% - 10px); 
+    padding: 10px;
+    box-sizing: border-box; 
+    border-radius: 5px;
+    height: 260px;
+    border-right: 1px solid #ddd;
+}
+/* Style for the Projects section */
+.projects-main {
+    /* background-color: #f8f8f8; */
+    padding: 20px;
+    width: 90%;
+    padding: 10px 0px 10px 130px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap; /* Allow elements to wrap to the next row */
+    justify-content: space-between; /* Distribute elements evenly */
+}
+
+/* Style for the individual project elements */
+.projects-element1 {
+    flex: 0 1 calc(50% - 10px); /* Allow a maximum of 2 elements in a row (50% width) */
+    padding: 10px;
+    box-sizing: border-box; /* Include padding in element's width */
+    border: 1px solid #ddd; /* Add a border for distinction */
+    background-color: #b0c4b1; /* Set background color for individual project containers */
+    margin:11px -5px 0px 10px;
+    width: 50%;
+}
+
+/* Style for the unordered list */
+.projects-element1 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.projects-element1 li {
+    margin-bottom: 10px;
+     
+}
+/* Style for the text class */
+.text {
+    font-weight: bold; /* Make the text bold */
+    color: #007bff; /* Highlight the text with blue color */
+    margin-right: 5px; /* Add a small margin to the right of the text */
+}
+
+/* Style for links */
+.projects-element1 a {
+    text-decoration: none; /* Remove underline from links */
+    color: #007bff; /* Set link color to blue */
+}
+
+.projects-element1 a:hover {
+    text-decoration: underline; /* Add underline on hover */
+}
+
+
+/* Style for the Contacts section */
+.contacts-main ,.achievement-main{
+
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 80%;
+    margin: 10px 0px 0px 132px;
+}
+
+/* Style for the individual contact elements */
+.contacts-element1 ul,.achievement-element1 ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contacts-element1 li ,.achievement-element1 li{
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd; /* Add a bottom border to each contact item */
+    padding-bottom: 10px!important; /* Add some padding to the bottom of each contact item */
+    padding-top: 10px;
+
+}
+
+/* Style for the text class */
+.text {
+    font-weight: bold; /* Make the text bold */
+    color: #007bff; /* Highlight the text with blue color */
+    margin-right: 5px; /* Add a small margin to the right of the text */
+}

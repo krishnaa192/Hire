@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.conf import settings
 
 
+
 class Profile(models.Model):
     user= models.OneToOneField(User,on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
@@ -13,33 +14,6 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.name
-
-class Recruiter(models.Model):
-    #grade c:3lpa to 7lpa and for internship 4k to 12k
-    #grade b:7lpa to 18lpa and for internship 12k to 40k
-    #grade a:18lpa to 50lpa and for internship 40k to 2lacs
-    #grade A+:50lpa+ and for internship 2lacs+ 
-    grade=[
-        ('A','A'),
-        ('B','B'),
-        ('C','C'),
-    ]
-    user=models.OneToOneField(Profile,on_delete=models.CASCADE)
-    company_id=models.AutoField(primary_key=True)
-    is_recruiter = models.BooleanField(default=True)
-    is_applicant = models.BooleanField(default=False)
-    company_name = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to='logo')
-    about_company = models.TextField()
-    company_address = models.CharField(max_length=100)
-    company_website = models.CharField(max_length=100)
-    company_email = models.CharField(max_length=100)
-    recruting_face=models.CharField(max_length=100)
-    grade=models.CharField(max_length=100,choices=grade)
-
-    def __str__(self):
-        return self.company_name
-
 
 class ApplicantProfile(models.Model):
     highrt_qualification=[
@@ -66,58 +40,48 @@ class ApplicantProfile(models.Model):
     profile_pic = models.ImageField(upload_to='image/profile')
     resume = models.FileField(upload_to='resume', null=True, blank=True)
     highest_qualification=models.CharField(max_length=100,choices=highrt_qualification)
+    address=models.CharField(max_length=100,blank=True,null=True)
+    city=models.CharField(max_length=100,blank=True,null=True)
+    state=models.CharField(max_length=100,blank=True,null=True)
+
 
     def __str__(self):
         return self.user.name
-    
+
+class Recruiter(models.Model):
+    #grade c:3lpa to 7lpa and for internship 4k to 12k
+    #grade b:7lpa to 18lpa and for internship 12k to 40k
+    #grade a:18lpa to 50lpa and for internship 40k to 2lacs
+    #grade A+:50lpa+ and for internship 2lacs+ 
+    grade=[
+        ('A','A'),
+        ('B','B'),
+        ('C','C'),
+    ]
+    user=models.OneToOneField(Profile,on_delete=models.CASCADE,related_name='recruiter')
+    company_id=models.AutoField(primary_key=True)
+    is_recruiter = models.BooleanField(default=True)
+    is_applicant = models.BooleanField(default=False)
+    company_name = models.CharField(max_length=100)
+    logo = models.ImageField(upload_to='logo')
+    about_company = models.TextField()
+    company_address = models.CharField(max_length=100)
+    company_website = models.CharField(max_length=100)
+    company_email = models.CharField(max_length=100)
+    recruting_face=models.CharField(max_length=100)
+    grade=models.CharField(max_length=100,choices=grade)
+
+    def __str__(self):
+        return self.company_name
+
+
 class Job_category(models.Model):
     category=models.CharField(max_length=100)
 
     def __str__(self):
         return self.category
     
-class Education(models.Model):
-    degree=[
-        ('B.Tech','B.Tech'),
-        ('B.E','B.E'),
-        ('B.Sc','B.Sc'),
-        ('B.Com','B.Com'),
-        ('B.A','B.A'),
-        ('M.Tech','M.Tech'),
-        ('M.E','M.E'),
-        ('M.Sc','M.Sc'),
-        ('M.Com','M.Com'),
-        ('M.A','M.A'),
-        ('Phd','Phd'),
-        ('Diploma','Diploma'),
-        ('HighSchool','HighSchool'),
-        ('Intermediate','Intermediate'),
 
-    ]
-    profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True)
-    
-    degree = models.CharField(max_length=100,choices=degree)
-    college = models.CharField(max_length=100)
-    board_or_university = models.CharField(max_length=100)
-    passing_year = models.CharField(max_length=100)
-    percentage = models.CharField(max_length=100)
-
-    def __str__(self):
-        return self.profile.user.name+" "+self.degree
-   
-class Skill(models.Model):
-    skills_level=[
-        ('basic','basic'),
-        ('moderate','moderate'),
-        ('advanced','advanced'),
-    ]
-    profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True)
-    name = models.CharField(max_length=100)
-    level = models.CharField(max_length=100,choices=skills_level)
-
-    def __str__(self):
-        return self.profile.user.name +'  have'+self.name+' '+self.level
-    
 class Job(models.Model):
     id=models.AutoField(primary_key=True)
     job_types=[
@@ -141,9 +105,60 @@ class Job(models.Model):
     experience = models.CharField(max_length=100)
     job_type=models.CharField(choices=job_types,max_length=100)
     vacancy=models.IntegerField( default=1)
+    category=models.ForeignKey(Job_category,on_delete=models.CASCADE,null=True)
     
     def __str__(self):
         return self.title
+class SavedJob(models.Model):
+    id=models.AutoField(primary_key=True)
+    candidate_detail = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE,null=True)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    saved_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.candidate_detail.user.name+" saved "+self.job.title
+class Education(models.Model):
+    degree=[
+        ('B.Tech','B.Tech'),
+        ('B.E','B.E'),
+        ('B.Sc','B.Sc'),
+        ('B.Com','B.Com'),
+        ('B.A','B.A'),
+        ('M.Tech','M.Tech'),
+        ('M.E','M.E'),
+        ('M.Sc','M.Sc'),
+        ('M.Com','M.Com'),
+        ('M.A','M.A'),
+        ('Phd','Phd'),
+        ('Diploma','Diploma'),
+        ('HighSchool','HighSchool'),
+        ('Intermediate','Intermediate'),
+
+    ]
+    profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True)
+    degree = models.CharField(max_length=100,choices=degree)
+    college = models.CharField(max_length=100)
+    board_or_university = models.CharField(max_length=100)
+    passing_year = models.CharField(max_length=100)
+    percentage = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.profile.user.name+" "+self.degree
+   
+class Skill(models.Model):
+    skills_level=[
+        ('basic','basic'),
+        ('moderate','moderate'),
+        ('advanced','advanced'),
+    ]
+    profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True)
+    name = models.CharField(max_length=100)
+   
+
+    def __str__(self):
+        return self.profile.user.name +'  have '+self.name
+    
+
 
 class Project(models.Model):
     profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True)
@@ -208,3 +223,21 @@ class Experience (models.Model):
 
     def __str__(self):
         return self.userprofile.user.name+"  by  "+self.company
+    
+
+
+class Message(models.Model):
+    id=models.AutoField(primary_key=True)
+    sender=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='sender')
+    receiver=models.ForeignKey(Profile,on_delete=models.CASCADE,related_name='receiver')
+    subject=models.CharField(max_length=100)
+    is_read=models.BooleanField(default=False)
+    message=models.TextField()
+    timestamp=models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.sender.name+" send message to "+self.receiver.name
+    
+    class Meta:
+        ordering=['is_read','-timestamp']
+

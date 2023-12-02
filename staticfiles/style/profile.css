@@ -1,0 +1,187 @@
+.loginbox{
+    width: 380px !important;
+    height: auto !important;
+    background: #051923;
+    color: #fff;
+    top: 70%;
+    left: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 40px 30px;
+    border-radius: 20px; 
+}
+.loginbox h1{
+    margin: 0;
+    padding: 0 0 20px;
+    text-align: center;
+    font-size: 22px;
+}
+.loginbox input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+.loginbox label{
+   display: flex !important;
+    margin: 0px 0px 0px 100px;
+    padding: 2px 0px 0px 0px;
+    font-weight: bold;
+    display: block;
+    align-items: center;
+    font-size: 16px;
+    
+}
+.loginbox input[type="text"]{
+    border: none;
+    border-bottom: 1px solid #fff;
+    background: transparent;
+    outline: none;
+    height: 30px;
+    margin: 0px 0px -28px 8px;
+    color: #fff;
+    font-size: 16px;
+    /* animate */
+    transition: all 0.5s ease-in-out;
+}
+.loginbox input[type="text"]:focus{
+    border-bottom: 1px solid #ffc107;
+}
+
+
+.loginbox input[type="submit"]{
+    border: none;
+    outline: none;
+    height: 40px;
+    background: #ee4266;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px;
+}
+.loginbox input[type="submit"]:hover{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+.signup{
+    margin-left: 100px;
+    color: #fff;
+    font-size: 16px;
+    display: flex;
+}
+.signup a{
+    text-decoration: none;
+    color: #ffc107;
+}
+.signup p{
+    margin: 0;
+    padding: 0;
+    font-weight: bold;
+
+}
+.signup-btn{
+    width: auto;
+    margin-bottom: 20px;
+    background-color: #fb2525;
+    border: none;
+    outline: none;
+    height: auto;
+    background: #fb2525;
+    color: #fff;
+    font-size: 12px;
+    /* border-radius: 20px; */
+    margin: 0px 0px 0px 0px;
+  
+}
+
+.images img{
+    width: 100%;
+    height: 510px;
+    margin: -66px 0px 0px  10px;
+    
+    
+}
+.images{
+    width: 380px;
+    height: 520px;
+    margin: 308.5px 0px 0px 568px;
+    background: #051923; 
+    color: #fff;
+    top: 60%;
+    left: 40%;
+    /* position: absolute; */
+    transform: translate(-50%,-50%);
+    box-sizing: border-box;
+    padding: 70px 30px 0px 0px;
+    /* border-radius: 20px; */
+}
+/* animate when cursor on input */
+.loginbox input[type="text"]:focus{
+    border-bottom: 1px solid #ffc107;
+  
+}input[type=Checkbox]{
+    width: 20px;
+    height: 20px;
+    background: #051923;
+    border: 1px solid #fff;
+    cursor: pointer;
+    margin: 0px 0px 0px 0px !important;
+    padding: 2px 0px 0px 0px !important;
+    border-radius: 0px;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border-radius: 0px;
+    outline: none;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+}
+input[type=Checkbox]:hover{
+    background: #ffc107;
+    color: #000;
+}
+input[type=Checkbox]:focus{
+    background: #ffc107;
+    color: #000;
+}
+p{
+    margin: -24px 160px 0px 0px !important;
+    padding: 0 !important;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+}
+
+ .errorlist li {
+    margin: -24px 160px 0px 0px !important;
+    padding: 0px 0px 0px 0px !important;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+} 
+.alert-danger{
+    margin: -24px 160px 0px 0px !important;
+    padding: 0 !important;
+    font-weight: bold;
+    display: block;
+    font-size: 16px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    line-height: 20px;
+}
