@@ -7,8 +7,8 @@ Hiring App is a Django project designed to streamline the recruitment process fo
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/your_username/hiring-app.git
-    cd hiring-app
+   https://github.com/krishnaa192/Hire.git
+    cd Hiring
     ```
 
 2. Create a virtual environment and activate it:
