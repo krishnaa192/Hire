@@ -42,7 +42,15 @@ Hiring App is a Django project designed to streamline the recruitment process fo
     python manage.py runserver
     ```
 
-7. Access the application in your web browser at `http://localhost:8000`.
+7. Access the application in your web.
+ browser at `http://localhost:8000`.
+
+## Screenshots
+![Screenshot from 2024-03-30 11-21-![Screenshot from 2024-03-30 11-20-07](https://github.com/krishnaa192/Hire/assets/86311851/9a716519-3202-420e-b57f-ff44825badee)
+42](https://github.com/krishnaa192/Hire/assets/86311851/d4d8a3f0-5d13-4975-a717-904b8ab76c53)
+![Screenshot from 2024-03-30 11-21-34](https://github.com/krishnaa192/Hire/assets/86311851/5994c284-38c7-4f5b-ade7-a1f9fe6f48b5)
+![Screenshot from 2024-03-30 11-21-04](https://github.com/krishnaa192/Hire/assets/86311851/7f32ffe4-3205-4436-95ae-6eebefb42c96)
+
 
 ## Usage
 
