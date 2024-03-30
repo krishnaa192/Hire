@@ -1,0 +1,137 @@
+/* Form container */
+.form-container {
+    width: 700px;
+    margin: auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+  }
+  
+  /* Form stages */
+  .form-stage {
+    display: none;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-stage.active {
+    display: block;
+  }
+  
+  /* Form content */
+  .form-content {
+    margin-bottom: 20px;
+  }
+  
+  /* Form group */
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Buttons */
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .errorlist{
+    color: red;
+    font-size: small;
+
+  }
+  .next-button,
+  .prev-button,
+  .submit-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .next-button:hover,
+  .prev-button:hover,
+  .submit-button:hover {
+    background-color: #007bff;
+  }
+  
+  .prev-button,
+  .submit-button {
+    background-color: #6c757d;
+    color: #fff;
+  }
+  
+  .prev-button:hover,
+  .submit-button:hover {
+    background-color: #5a6268;
+  }
+  
+  /* Progress bar */
+  .progress-bar {
+    background-color: #007bff;
+    height: 5px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  
+  .progress {
+    height: 100%;
+    border-radius: 5px;
+  }
+  
+  /* Field labels */
+  .label {
+    font-weight: bold;
+  }
+  
+  /* Error messages */
+  .error-message {
+    color: red;
+    margin-top: 5px;
+  }
+  
+  /* Success message */
+  .success-message {
+    color: green;
+    margin-top: 5px;
+  }
+
+  /* Text fields */
+input[type="text"],
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Focus state */
+input[type="text"]:focus,
+textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Placeholder color */
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+:-moz-placeholder {
+  color: #999;
+}
+
+::-moz-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+  

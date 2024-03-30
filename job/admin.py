@@ -15,4 +15,6 @@ admin.site.register(addLink)
 admin.site.register(Experience)
 admin.site.register(Message)
 admin.site.register(Job_category)
-admin.site.register(SavedJob)
+
+admin.site.register(achievement)
+admin.site.register(SaveJob)

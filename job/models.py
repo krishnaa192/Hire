@@ -109,14 +109,7 @@ class Job(models.Model):
     
     def __str__(self):
         return self.title
-class SavedJob(models.Model):
-    id=models.AutoField(primary_key=True)
-    candidate_detail = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE,null=True)
-    job = models.ForeignKey(Job, on_delete=models.CASCADE)
-    saved_on = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return self.candidate_detail.user.name+" saved "+self.job.title
 class Education(models.Model):
     degree=[
         ('B.Tech','B.Tech'),
@@ -174,12 +167,23 @@ class Project(models.Model):
         return self.profile.user.name+"  by  "+self.name 
     
 class Apply(models.Model):
+    status=[
+        ('Resume Sent','Resume Sent'),
+        ('Resume Viewed','Resume viewed'),
+        ('Not selected','Not selected'),
+        ('In Process','In Process'),
+        ('Hired','Hired'),
+        ('Resume Shortlisted','Resume Shortlisted')
+    ]
     id=models.AutoField(primary_key=True)
     candidate_detail = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE,null=True)
     recruiter_detail = models.ForeignKey(Recruiter, on_delete=models.CASCADE,null=True)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     about = models.TextField(help_text="Why should we hire you")
     applied_on = models.DateTimeField(auto_now_add=True)
+    job_status=models.CharField(max_length=100,choices=status,default='Resume Sent')
+
+
 
     def __str__(self):
         return self.candidate_detail.user.name+" applied for "+self.recruiter_detail.company_name+" "+"for the post"+" "+self.job.title
@@ -223,7 +227,16 @@ class Experience (models.Model):
 
     def __str__(self):
         return self.userprofile.user.name+"  by  "+self.company
-    
+
+class achievement(models.Model):
+    userprofile=models.ForeignKey(ApplicantProfile,on_delete=models.CASCADE,null=True,related_name='achievement')
+    text=models.TextField()
+    date=models.DateField()
+    Institution=models.CharField(max_length=40,null=True)
+
+    def  __str__(self):
+        
+          return self.userprofile.user.name+" has "+self.text
 
 
 class Message(models.Model):
@@ -241,3 +254,11 @@ class Message(models.Model):
     class Meta:
         ordering=['is_read','-timestamp']
 
+class SaveJob(models.Model):
+    id=models.AutoField(primary_key=True)
+    candidate_detail = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE,null=True)
+    job = models.ForeignKey(Job, on_delete=models.CASCADE)
+    saved_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.candidate_detail.user.name+" saved "+self.job.title

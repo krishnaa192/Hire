@@ -21,5 +21,4 @@ class RecruiterForm(forms.ModelForm):
 class JobForm(forms.ModelForm):
     class Meta:
         model = Job
-
         exclude = ['recruiter']

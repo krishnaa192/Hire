@@ -5,18 +5,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock %}
 {% block content %}
-<nav class="navbar">
-    <div class="nav-title">Hire</div>
-    <div class="nav-content">
-        <div class="nav-items">
-            <div class="nav-item"><a href="{% url 'home' %}">Home</a></div>
-            <div class="nav-item"><a href="#">About us</a></div>
-            <div class="nav-item"><a href="{% url 'logout' %}">Logout</a></div>
-        </div>
-       
-    </div>
-
-</nav>
+{% include 'header.html' %}
+ <a href="Go to job search"></a>
 
 <h1>you have  Applied</h1>
 

@@ -5,7 +5,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
- path('/', views.recruiter_home, name='recruiter_home'),
+ path('', views.recruiter_home, name='recruiter_home'),
  path('k/', views.recruiter_dashboard, name='recruiter_dashboard'),
  path('list/', views.candidate_list, name='candidate_list'),
  path('job/',views.rec_job,name='job'),

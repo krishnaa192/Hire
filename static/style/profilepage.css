@@ -322,3 +322,17 @@ input[type="text"] {
     color: #007bff; /* Highlight the text with blue color */
     margin-right: 5px; /* Add a small margin to the right of the text */
 }
+.achievement-element1{
+    flex: 0 1 calc(50% - 10px); 
+    padding: 10px;
+    padding-bottom: 0px;
+    box-sizing: border-box; 
+    border-radius: 5px;
+    /* height: 260px; */
+    border-right: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 3px;
+
+}
+
+

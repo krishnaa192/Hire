@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    {% include 'Recruiter/headers.html' %}
+    {% include 'Recruiter/recheaders.html' %}
     <div class="scroll">
         <div class="image">
             <img src="../../static/img/peakpx (6).jpg" alt="">
@@ -22,7 +22,7 @@
         <div class="text-on-image">
             <h1> Post Your Job</h1>
             <p>Post your job and find the people you think will fit for role</p>
-            <button class="btns"> <a href="">Post Job</a></button>
+            <button class="btns"> <a href="{% url 'job_create'%}">Post Job</a></button>
         </div>
     </div>
     <!-- search box -->

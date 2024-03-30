@@ -6,6 +6,8 @@
     <meta charset="utf-8">
     <title>Hire</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta content="" name="keywords">
     <meta content="" name="description">
 
@@ -50,7 +52,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
                     <a href="{% url 'home' %}" class="nav-item nav-link active">Home</a>
-                    <a href="{% url 'inbox' %}" class="nav-item nav-link"><i class="fas fa-solid fa-comment"></i></a>
+                    <!-- <a href="{% url 'inbox' %}" class="nav-item nav-link"><i class="fas fa-solid fa-comment"></i></a> -->
                     <a href="{% url 'jobs' %}" class="nav-item nav-link">Jobs</a>
                     <!-- <a href="" class="nav-item nav-link">Generate Resume </a> -->
                     <div class="nav-item dropdown">
@@ -58,6 +60,7 @@
                         <div class="dropdown-menu">
                             <a href="{% url 'user_profile' %}" class="dropdown-item"> Profile </a>
                             <a href="{% url 'setting' %}" class="dropdown-item">Applied Jobs</a>
+                            <a href="{% url 'saved_jobs' %}" class="dropdown-item">Saved Jobs</a>
                             <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

@@ -4,7 +4,19 @@
     --secondary: #2B9BFF;
     --light: #EFFDF5;
     --dark: #2B3940;
+    width: 100% !important;
 }
+
+
+body {
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    margin-right: -1rem !important;
+}
+
+.container-xxl {
+    overflow-x: hidden; /* Hide horizontal scrollbar for large containers */
+}
+
 
 .back-to-top {
     position: fixed;
@@ -233,7 +245,7 @@
 }
 
 .page-header {
-    background: linear-gradient(rgba(43, 57, 64, .5), rgba(43, 57, 64, .5)), url(../img/job.jpg) center center no-repeat;
+    background: linear-gradient(rgba(43, 57, 64, .5), rgba(43, 57, 64, .5));
     background-size: cover;
 }
 
@@ -320,6 +332,9 @@
 .testimonial-carousel .owl-dot.active {
     background: var(--dark);
     border-color: var(--primary);
+}
+.footer{
+    margin-right:  10rem  !important;
 }
 
 
@@ -452,13 +467,7 @@
     background-color: #00171f!important;
     border-color: #f4acb7!important;
 }
-.footer
-{
-    width: 1350px !important; 
-    margin:18px 0px 0px -57px  !important; 
-    padding: 0px 0px 0px 0px !important;
-   
-}
+
 .py-5{
     padding-bottom: 0%!important;
   

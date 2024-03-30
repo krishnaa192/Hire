@@ -1,4 +1,3 @@
-
 {% load static %}
 
 <!DOCTYPE html>
@@ -35,8 +34,7 @@
         <a href="{% url 'home' %}" class="navbar-brand d-flex align-items-center text-center py-0 px-4 px-lg-5">
             <h1 class="m-0 text-primary">Hire</h1>
         </a>
-        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse"
-            data-bs-target="#navbarCollapse">
+        <button type="button" class="navbar-toggler me-4" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarCollapse">
@@ -54,10 +52,10 @@
                     </div>
                 </div>
             </div>
-        {% if profile.is_recruiter %}
-            <a href="{% url 'job_create' %}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A Job<i
-                    class="fa fa-arrow-right ms-3"></i></a>
-         {% endif %}
+            {% if profile.is_recruiter %}
+            <a href="{% url 'job_create' %}" class="btn btn-primary rounded-0 py-4 px-lg-5 d-none d-lg-block">Post A
+                Job<i class="fa fa-arrow-right ms-3"></i></a>
+            {% endif %}
         </div>
     </nav>
     <div class="container">
@@ -70,35 +68,39 @@
                 </div>
                 <div class="chatcont">
                     <!-- 1 -->
-                    {% for messages in  messagesent %}
-                    <div class="chatlist" onclick="redirectToLink('{% url 'view-msg' messages.pk%}')">
-                        <div class="userhead">
-                            <img src="../static/img/testimonial-1.jpg">
-                        </div>
-                        <div class="chat-desc">
-                            <div class="chatlistname">
-                                <a href="">{{ messages.sender }} </a>
+                    {% for messages in messagesent %}
+                    <a href="{% url 'view-msg' messages.pk %}">
+
+                        <div class="chatlist">
+                            <div class="userhead">
+                                <img src="../static/img/testimonial-1.jpg">
                             </div>
-                            <div class="chat">
-                                <!-- {{ messages.message }} -->
-                                How are You?
-                                <span> {{messages.timestamp}}</span>
+                            <div class="chat-desc">
+                                <div class="chatlistname">
+                                    <a href="">{{ messages.sender }} </a>
+                                </div>
+                                <div class="chat">
+                                 {{ messages.message }} 
+                                   
+                                    <span> {{messages.timestamp}}</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                     {% endfor %}
                 </div>
             </div>
         </div>
- <div class="user-chats">
 
-     <p>No Message to be Shown.</p>
-     <p class="send-button"> <a href="">Send message instanty</a></p>
-   
-   
-</div> 
-        
-        
+        <div class="user-chats">
+
+            <p>No Message to be Shown.</p>
+            <p class="send-button"> <a href="">Send message instanty</a></p>
+
+
+        </div>
+
+
     </div>
 
     <script>
@@ -107,18 +109,18 @@
         }
         function showChatBox() {
             document.getElementById('user-msg').style.display = 'block';
-            
+
             // by default leave it empty   
 
         }
-      
-    // function showFewWords() {
-    //   var fullText = document.getElementById('fullText').textContent;
-    //   var wordsArray = chat.split(' ');
-    //   var limitedWords = wordsArray.slice(0, 5).join(' ');
-    //   document.getElementById('limitedText').textContent = limitedWords + '...';
-    // }
- 
+
+        // function showFewWords() {
+        //   var fullText = document.getElementById('fullText').textContent;
+        //   var wordsArray = chat.split(' ');
+        //   var limitedWords = wordsArray.slice(0, 5).join(' ');
+        //   document.getElementById('limitedText').textContent = limitedWords + '...';
+        // }
+
     </script>
 </body>
 

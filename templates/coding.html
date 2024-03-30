@@ -1,0 +1,47 @@
+<!-- compiler/templates/compiler/compile.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Compiler</title>
+</head>
+<body>
+    <form id="compiler-form">
+        <textarea name="code" rows="10" cols="50"></textarea>
+        <br>
+        <label for="lang">Select Language:</label>
+        <select name="lang">
+            <option value="python">Python</option>
+            <!-- Add more language options as needed -->
+        </select>
+        <br>
+        <button type="button" onclick="compileCode()">Compile</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        function compileCode() {
+            var code = document.getElementsByName('code')[0].value;
+            var lang = document.getElementsByName('lang')[0].value;
+
+            fetch('/compile/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value,
+                },
+                body: new URLSearchParams({
+                    'code': code,
+                    'lang': lang,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').innerText = data.result || data.error;
+            });
+        }
+    </script>
+</body>
+</html>

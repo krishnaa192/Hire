@@ -10,12 +10,12 @@
 <div class="image">
     <img src="{{applicant.profile_pic.url}}" alt="Nice">
     <!-- <i class="fas fa-upload">  </i> -->
-    <i class="fas fa-camera upload-icon"></i> 
-    
+    <i class="fas fa-camera upload-icon"></i>
+
     <!-- <a href="https://karanrupadhyay.github.io/Portfolio/"> Portfolio</a> -->
 </div>
 <div class="personal">
-    <h2>Personal Details  <a href="{% url 'updateApplicant' %}" class="edit-link"><i class="fas fa-edit"></i></a></h2>
+    <h2>Personal Details <a href="{% url 'updateApplicant' %}" class="edit-link"><i class="fas fa-edit"></i></a></h2>
     <div class="personal-main">
         <div class="personal-element1">
             <ul>
@@ -55,8 +55,8 @@
     <div class="search-add">
         <form action="{% url 'add_skill' %}" method="POST">
             {% csrf_token %}
-        <input type="text" id="skill-search"  name="name" placeholder="Search skills" required id="id_nam">
-      <button  id="add-skill">  <i class="fas fa-solid fa-plus"></i> </button>
+            <input type="text" id="skill-search" name="name" placeholder="Search skills" required id="id_nam">
+            <button id="add-skill"> <i class="fas fa-solid fa-plus"></i> </button>
         </form>
     </div>
     <div class="skill-main">
@@ -64,7 +64,7 @@
             {% for skills in skill %}
             <li>
                 {{skills.name}}
-                <button class="remove-skill"><a href="{% url 'delete_skill' skills.pk %}" >X </a></button>
+                <button class="remove-skill"><a href="{% url 'delete_skill' skills.pk %}">X </a></button>
             </li>
             {% endfor %}
 
@@ -72,15 +72,17 @@
     </div>
 
     <div class="education">
-        <h2>Education    <a href="{% url 'add_education' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
+        <h2>Education <a href="{% url 'add_education' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
         <div class="education-main">
             {% for educations in education %}
             <div class="education-element1">
 
                 <ul>
 
-                    <a href="{% url 'update_education' educations.pk %}" class="edit-link"><i class="fas fa-edit"></i></a>
-                    <a href="{% url 'delete_education' educations.pk %}" class="delete-link"><i class="fas fa-trash-alt"></i></a>
+                    <a href="{% url 'update_education' educations.pk %}" class="edit-link"><i
+                            class="fas fa-edit"></i></a>
+                    <a href="{% url 'delete_education' educations.pk %}" class="delete-link"><i
+                            class="fas fa-trash-alt"></i></a>
                     <li>
                         <div class="text">Degree:</div> {{educations.degree}}
                     </li>
@@ -94,19 +96,21 @@
                         <div class="text">Year of passing:</div> {{educations.passing_year}}
                     </li>
                     <li>
-                
+
 
             </div>
             {% endfor %}
         </div>
         <div class="projects">
-            <h2>Projects  <a href="{% url 'add_project' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
+            <h2>Projects <a href="{% url 'add_project' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
             <div class="projects-main">
                 {% for projects in project %}
                 <div class="projects-element1">
                     <ul>
-                        <a href="{% url 'update_project' projects.pk %}" class="edit-link"><i class="fas fa-edit"></i></a>
-                        <a href="{% url 'delete_project' projects.pk %}" class="delete-link"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{% url 'update_project' projects.pk %}" class="edit-link"><i
+                                class="fas fa-edit"></i></a>
+                        <a href="{% url 'delete_project' projects.pk %}" class="delete-link"><i
+                                class="fas fa-trash-alt"></i></a>
                         <li>
                             <div class="text">Project Name:</div> {{projects.name}}
                         </li>
@@ -136,37 +140,39 @@
 
             </div>
             <div class="contacts">
-                <h2>Contacts  <a href="{% url 'add_link' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
+                <h2>Contacts <a href="{% url 'add_link' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
                 <div class="contacts-main">
                     <div class="contacts-element1">
-                        <ul
-                            {% for links in link %}
-                            <li>
-                                <div class="text">{{links.name}}:</div> {{links.link}}   
-                                <button class="remove-skill"><a href="{% url 'delete_link' links.pk %}" >X </a></button>
+                        <ul {% for links in link %} <li>
+                            <div class="text">{{links.name}}:</div> {{links.link}}
+                            <button class="remove-skill"><a href="{% url 'delete_link' links.pk %}">X </a></button>
                             </li>
                             {% endfor %}
-                           
+
 
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="achievement">
-                <h2>Achievements</h2>
+                <h2>Achievements <a href="{% url 'add_achievement' %}" <i class="fas fa-solid fa-plus"></i> </a></h2>
                 <div class="achievement-main">
+                    {% for achievement in achievements %}
                     <div class="achievement-element1">
                         <ul>
                             <li>
-                                <i class="fas fa-circle"></i>: Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Dolores nam architecto dicta ipsum cum nihil illum.
+                                <div class="text">Title:</div> {{ achievement.text }}
                             </li>
                             <li>
-                                <i class="fas fa-circle"></i>: Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Dolores nam architecto dicta ipsum cum nihil illum.
+                                <div class="text">Start Date:</div> {{ achievement.date }}
+                            </li>
+                            <li>
+                                <div class="text">Institute:</div> {{ achievement.Institution }}
+                            </li>
                         </ul>
-
                     </div>
+                    {% endfor %}
+
 
                 </div>
 

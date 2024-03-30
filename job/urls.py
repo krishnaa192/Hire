@@ -30,16 +30,21 @@ urlpatterns = [
     path('add_education', views.education, name='add_education'),
     path('update_education/<int:pk>/', views.update_education, name='update_education'),
     path('add_project', views.project, name='add_project'),
+    path('add-achievement',views.add_achievement,name='add_achievement'),
     path('update_project/<int:pk>/', views.update_project, name='update_project'),
     path('user/skill', views.add_skill, name='add_skill'),
     path('user/delete_skill/<int:pk>/', views.delete_skill, name='delete_skill'),
     path('links/', views.addlink, name='add_link'),
+
     path('deleteLink/<int:pk>/', views.deleteLink, name='delete_link'),
     #category endpoints
     path('jobs/category/<str:cat>/', views.category, name='web_dev'),
     path('inbox/', views.inbox, name='inbox'),
     path('send/<int:pk>/',views.SendMessage,name='send'),
     path('inbox/msg/<int:pk>/',views.view_msg ,name='view-msg'),
+    path('job/application/<int:pk>/',views.see_application ,name='see-application'),
+    path('save_job/<int:pk>/', views.save_job, name='save_job'),
+    path('saved_jobs/', views.saved_job, name='saved_jobs'),
 
 ]
 if settings.DEBUG:

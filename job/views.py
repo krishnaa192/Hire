@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from .forms import*
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect
 from .models import *
 from recruiter.models import *
 from recruiter.forms import *
@@ -10,15 +10,13 @@ from django.db.models import Q
 from django.core.mail import send_mail
 from .decoratore import is_recruiter,is_applicant
 from django.core.paginator import Paginator
-# Create your views here.
+from .utils import *
 
 def header(request):
     user=request.user
     applicant=ApplicantProfile.objects.get(user=user.id)
     context={'applicant':applicant}
     return render(request,'header.html',context)
-
-
 
 
 def profile(request):
@@ -35,7 +33,8 @@ def profile(request):
     return render(request,'signup2.html', {'form':form})
 
 def welcome(request):
-    
+    if request.user.is_authenticated:
+        return redirect('home')
     return render(request,'index.html')
 
 def candidate_signup(request):
@@ -87,13 +86,8 @@ def candidate_profile(request):
     context = {'form': form}
     return render(request, 'candidate_profile.html', context)
 
-
-
-
-
 def job_detail(request, pk):
     job = Job.objects.get(id=pk)
- 
     applicant=ApplicantProfile.objects.get(user=request.user.id)
     context = {'job': job,'applicant':applicant}
     return render(request, 'job-detail.html', context)
@@ -117,12 +111,8 @@ def apply_job(request, pk):
             appli = form.save(commit=False)
             appli.job = job
             appli.save()
-             # Sending email notification
-            subject = 'Job Application'
-            message = f'A new application has been submitted for the job "{job.title}" by {profile.name}.'
-            from_email = 'krisna.upadhyayyy@gmail.com'  # Set your 'from' email address here
-            recipient_list = [profile.email]
-            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+             # Call the utility function to send email notification
+            send_job_application_notification(job.title, profile.name, profile.email)
             return redirect('home')
     else:       
         form = ApplyForm(initial={
@@ -130,7 +120,6 @@ def apply_job(request, pk):
             'candidate_detail': candidate.id,
             'recruiter_detail': recruiter
         })
-
     context = {'job': job, 'form': form, 'candidate': candidate, 'recruiter': recruiter, 'profile': profile}
     return render(request, 'apply_form.html', context)
 
@@ -138,60 +127,26 @@ def apply_job(request, pk):
 def about(request):
     return render(request,'about.html')
 
-
-@is_applicant
+# @is_applicant
 def home(request):
  if not request.user.is_authenticated:
         return redirect('welcome')
  elif request.user.is_authenticated and request.user.profile.is_recruiter:
        return redirect('recruiter_home')  
  else:
-    jobs = Job.objects.all()
     profile=request.user.profile
+    applicant=ApplicantProfile.objects.get(user=profile)
+    jobs = Job.objects.all()
+    saved = SaveJob.objects.filter(candidate_detail=applicant).values_list('job', flat=True)
+    print(saved)
     category=Job_category.objects.all()
     skill=Skill.objects.all()
     applicant=ApplicantProfile.objects.get(user=profile)
     applied_jobs = Apply.objects.filter(candidate_detail=applicant).values('job')
     jobs = jobs.exclude(id__in=applied_jobs)
-    query = request.GET.get('q')
-    if query:
-         jobs = jobs.filter(
-            Q(experience__icontains=query) |
-            Q(location__icontains=query) |
-            Q(job_type__icontains=query)| 
-             Q(skills__icontains=query) 
-        ).distinct()
-    
-    #handling that after applying to a job it should not be shown in the list  
-    # Handling sort logic
-    sort_by = request.GET.get('sort')
-    if sort_by == 'experience_asc':
-        jobs = jobs.order_by('experience')
-    elif sort_by == 'experience_desc':
-        jobs = jobs.order_by('-experience')
-    elif sort_by == 'full_time':
-        jobs = jobs.filter(job_type='Full Time')
-    elif sort_by == 'part_time':
-        jobs = jobs.filter(job_type='Part Time')
-    elif sort_by == 'internship':
-        jobs = jobs.filter(job_type='Internship')
-    elif sort_by == 'salary_asc':
-        jobs = jobs.order_by('salary')
-    elif sort_by == 'salary_desc':
-        jobs = jobs.order_by('-salary')
-    elif sort_by == 'posted_on_asc':
-        jobs = jobs.order_by('posted_on')
-    elif sort_by == 'posted_on_desc':
-        jobs = jobs.order_by('-posted_on')
-        
-  
-    location_filter = request.GET.get('location')
-    if location_filter:
-      jobs = jobs.filter(location=location_filter)
-     
+    jobs= filter_and_sort_jobs(request,jobs)
     jobs = jobs[0:4]
-   
-    context = {'jobs': jobs,'profile':profile,'skill':skill,'category':category,'applicant':applicant}
+    context = {'jobs': jobs,'profile':profile,'skill':skill,'category':category,'applicant':applicant,'saved':saved}
     return render(request,'home.html',context)
 
 
@@ -201,41 +156,7 @@ def job_list(request):
     applied_jobs = Apply.objects.filter(candidate_detail=applicant).values('job')
     jobs = Job.objects.exclude(id__in=applied_jobs)
  
-    query = request.GET.get('q')
-    if query:
-        jobs = jobs.filter(
-            Q(experience__icontains=query) |
-            Q(location__icontains=query) |
-            Q(job_type__icontains=query) |
-            Q(skills__icontains=query)
-        ).distinct()
-
-    
-    sort_by = request.GET.get('sort')
-    if sort_by == 'experience_asc':
-        jobs = jobs.order_by('experience')
-    elif sort_by == 'experience_desc':
-        jobs = jobs.order_by('-experience')
-    elif sort_by == 'full_time':
-        jobs = jobs.filter(job_type='Full Time')
-    elif sort_by == 'part_time':
-        jobs = jobs.filter(job_type='Part Time')
-    elif sort_by == 'internship':
-        jobs = jobs.filter(job_type='Internship')
-    elif sort_by == 'salary_asc':
-        jobs = jobs.order_by('salary')
-    elif sort_by == 'salary_desc':
-        jobs = jobs.order_by('-salary')
-    elif sort_by == 'posted_on_asc':
-        jobs = jobs.order_by('posted_on')
-    elif sort_by == 'posted_on_desc':
-        jobs = jobs.order_by('-posted_on')
-
-    # Handle location filter
-    location_filter = request.GET.get('location')
-    if location_filter:
-        jobs = jobs.filter(location__icontains=location_filter)
-
+    jobs = filter_and_sort_jobs(request, jobs)
     # Create a paginator
     paginator = Paginator(jobs, 4)
     page_number = request.GET.get('page')
@@ -257,17 +178,24 @@ def user_profile(request):
     applicant=ApplicantProfile.objects.get(user=user.id)
     profile=Profile.objects.get(user=user.id)
     candidate=ApplicantProfile.objects.get(user=profile)
+    achievements=achievement.objects.filter(userprofile=applicant.id)
     skill=Skill.objects.filter(profile=applicant.id)
     education=Education.objects.filter(profile=applicant.id)
     project=Project.objects.filter(profile=applicant.id)
     link=addLink.objects.filter(profile=applicant.id)
-    context={'profile':profile,'candidate':candidate,'applicant':applicant,'skill':skill,'education':education,'project':project,'link':link}
+    context={'profile':profile,'candidate':candidate,'applicant':applicant,'skill':skill,'education':education,'project':project,'link':link,'achievements':achievements}
     return render(request,'profilepage.html',context)
 
 
 
 def update_profile(request):
-    return render(request,'profile_setting.html')
+    user=request.user
+    profile = Profile.objects.get(user=user)
+    applicant = ApplicantProfile.objects.get(user=profile)
+    applied=Apply.objects.filter(candidate_detail=applicant)
+    rejected=Apply.objects.filter(candidate_detail=applicant,job_status='Not selected')
+    print(rejected)
+    return render(request,'profile_setting.html',{'applied':applied,'applicant':applicant,'profile':profile,'rejected':rejected})
 
 
 def applicant_profile(request):
@@ -354,7 +282,6 @@ def delete_education(request,pk):
     return redirect('user_profile')
 
 
-
 def project(request):
     user=request.user
     profile=Profile.objects.get(user=user.id)
@@ -425,10 +352,7 @@ def addlink(request):
         form=AddLinkForm(request.POST,request.FILES)
         if form.is_valid():
             skill_name = form.cleaned_data['name']
-
-    
             existing_skill = Skill.objects.filter(name=skill_name).first()
-
             if not existing_skill:
                 # If no skill with the same name exists, save the new skill
                 skill = form.save(commit=False)
@@ -443,12 +367,33 @@ def deleteLink(request,pk):
     link.delete()
     return redirect('user_profile')
 
+
+def add_achievement(request):
+    user=request.user
+    profile=Profile.objects.get(user=user.id)
+    candidate=ApplicantProfile.objects.get(user=profile)
+    achievements=achievement.objects.filter(userprofile=candidate)
+    form=AchievementForm()
+    if  request.method=='POST':
+        form=AchievementForm(request.POST)
+        if form.is_valid():
+            achievements=form.save(commit=False)
+            achievements.userprofile=candidate
+            achievements.save()
+            return redirect('user_profile')
+    context={'profile':profile,'candidate':candidate,'achievements':achievements,'form':form}
+    return render(request,'achievement.html',context)
+
 def category(request,cat):
+    user=request.user
+    applicant=ApplicantProfile.objects.get(user=user.id)
     cats=Job_category.objects.get(category=cat)
     cat_job=Job.objects.filter(category=cats) 
-    context={'cat_job':cat_job,'cats':cats}
+    paginator = Paginator(cat_job, 4)
+    page_number = request.GET.get('page')
+    page = paginator.get_page(page_number)
+    context={'cat_job':cat_job,'cats':cats,'applicant':applicant,'page':page}
     return render(request,'categories.html',context) 
-
 
 
 @login_required(login_url='login')
@@ -493,3 +438,36 @@ def view_msg(request,pk):
             return redirect('/')
     context={'form':form,'receiver':receiver,'profile':profile,'messagesent':messagesent}
     return render(request,'usermsg.html',context)
+
+#see application
+
+def see_application(request,pk):
+    user=request.user
+    profile=request.user.profile
+    applicant=ApplicantProfile.objects.get(user=user.id)
+    applied=Apply.objects.get(id=pk,candidate_detail=applicant)
+    # applied = Apply.objects.filter(id=pk, candidate_detail=applicant).first()
+
+    return render(request,'seeapplication.html',{'applied':applied,'profile':profile,'applicant':applicant})
+  
+
+
+def save_job(request,pk):
+    user=request.user
+    profile=request.user.profile
+    applicant=ApplicantProfile.objects.get(user=user.id)
+    job=Job.objects.get(id=pk)
+    if SaveJob.objects.filter(job=job,candidate_detail=applicant).exists():
+        return redirect('home')
+    else:
+        saved=SaveJob.objects.create(job=job,candidate_detail =applicant)
+        saved.save()
+        return redirect('home')
+    
+def saved_job(request):
+    user=request.user
+    profile=request.user.profile
+    applicant=ApplicantProfile.objects.get(user=user.id)
+    saved=SaveJob.objects.filter(candidate_detail=applicant)
+    context={'saved':saved,'profile':profile,'applicant':applicant}
+    return render(request,'savedjob.html',context)

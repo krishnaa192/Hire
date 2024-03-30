@@ -66,6 +66,11 @@ class ProjectForm(forms.ModelForm):
         model = Project
         exclude = ['profile']
 
+class AchievementForm(forms.ModelForm):
+    class Meta:
+        model=achievement
+        exclude = ['userprofile']
+       
 
 
 
