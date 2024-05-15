@@ -29,7 +29,10 @@ def profile(request):
             profile = form.save(commit=False)
             profile.user = request.user  # Associate the profile with the user
             profile.save()
-            return redirect('applicant_profile')
+            if profile.is_recruiter:
+                return redirect('recruiter_profile')
+            else:
+              return redirect('applicant_profile')
     return render(request,'signup2.html', {'form':form})
 
 def welcome(request):
@@ -63,6 +66,9 @@ def candidate_login(request):
                 if user.profile.is_applicant:
                  login(request, user)
                  return redirect('home')
+                if user.profile.is_recruiter:
+                    login(request, user)
+                    return redirect('recruiter_home')
                 else:
                     return redirect('recruiter_home')  # Redirect to the candidate profile page after login
     else:
@@ -74,17 +80,6 @@ def logoutUser(request):
     logout(request)
     return redirect('welcome')
 
-
-@login_required(login_url='login')
-def candidate_profile(request):
-    form = CandidateForm()
-    if request.method == 'POST':
-        form = CandidateForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('home')
-    context = {'form': form}
-    return render(request, 'candidate_profile.html', context)
 
 def job_detail(request, pk):
     job = Job.objects.get(id=pk)
@@ -151,7 +146,8 @@ def home(request):
 
 
 def job_list(request):
-    profile = request.user.profile
+    user = request.user
+    profile=Profile.objects.get(user=user)
     applicant = ApplicantProfile.objects.get(user=profile)
     applied_jobs = Apply.objects.filter(candidate_detail=applicant).values('job')
     jobs = Job.objects.exclude(id__in=applied_jobs)

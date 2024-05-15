@@ -47,7 +47,7 @@
         <div class="category-container">
             {% for list in category %}
             <div class="container">
-                <i class="fa-solid fa-list"></i> <a href="">{{list.category}}</a>
+                <i class="fa-solid fa-list"></i> <a href="{% url 'web_dev' cat=list.category %}">{{list.category}}</a>
             </div>
             {% endfor %}
            
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                             <div class="job-btn">
-                                <button> <a href="{% url 'candidate_list' %}">See Job</a> </button>
+                                <button> <a href="{% url 'candidate_list' id=jobs.id %}">See Job</a> </button>
                             </div>
                         </div>
                         <div class="states">
@@ -85,7 +85,7 @@
                 {% endfor %}
             </ul>
             <div class="more-btn">
-                <button> <a href="{% url 'jobs' %}">See More</a></button>
+                <button> <a href="{% url 'job-list' %}">See More</a></button>
             </div>
         </div>
 

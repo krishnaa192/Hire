@@ -1,7 +1,9 @@
 *{
     box-sizing: border-box;
 }
-
+.profile-image img {
+    margin: 0px !important;
+}
 
 .job-box{
     display: flex;

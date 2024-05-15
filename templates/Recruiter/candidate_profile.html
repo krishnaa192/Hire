@@ -1,0 +1,200 @@
+{% load static %}
+{% block css%}
+<link href="{% static 'style/profilepage.css'%}" rel="stylesheet">
+{% endblock %}
+{% block body%}
+
+<div class="bg">
+    <img src="{% static 'img/job.jpg'%}" alt="">
+</div>
+<div class="image">
+    <img src="{{applicant.profile_pic.url}}" alt="Nice">
+    <!-- <i class="fas fa-upload">  </i> -->
+    <i class="fas fa-camera upload-icon"></i>
+
+    <!-- <a href="https://karanrupadhyay.github.io/Portfolio/"> Portfolio</a> -->
+</div>
+<form action="{% url 'send_email'%}" method="post">
+    {% csrf_token %}
+    <!-- Hidden input field containing the email address from the database -->
+    <input type="hidden" name="email" value="{{ profile.email }}">
+    <!-- Display a message or use a label to inform the user that an email will be sent to the email address -->
+    <button style="color: black;background-color: white;border: none; font-weight: 14px;cursor: pointer;margin-left: 45%;"   type="submit">Send Mail</button>
+</form>
+<div class="personal">
+    <h2>Personal Details</h2>
+    <div class="personal-main">
+        <div class="personal-element1">
+            <ul>
+                <li>
+                    Date of Birth: <span> 12/12/1999</span>
+                <li>
+                    Name: <span>{{profile.name}}</span>
+                </li>
+                <li>
+                    Email: <span>{{profile.email}} </span>
+                </li>
+                <li>
+                    Bio: <span>{{applicant.bio}}</span>
+                </li>
+            </ul>
+        </div>
+        <div class="personal-element2">
+            <ul>
+                <li>
+                    Location:<span>{{applicant.city}} </span>
+                </li>
+                <li>
+                    Highest Qualification <span>{{applicant.highest_qualification}}</span>
+                </li>
+                <li>
+                    Gmail: <span>{{profile.email}} </span>
+                </li>
+                <li>
+                    Address: <span>{{applicant.address}},{{applicant.city}} </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="skill">
+    <h2>Skills</h2>
+    <div class="search-add">
+
+    </div>
+    <div class="skill-main">
+        <ul class="skill-list">
+            {% for skills in skill %}
+            <li>
+                {{skills.name}}
+            </li>
+            {% endfor %}
+
+        </ul>
+    </div>
+
+    <div class="education">
+        <h2>Education </h2>
+        <div class="education-main">
+            {% for educations in education %}
+            <div class="education-element1">
+
+                <ul>
+                    <li>
+                        <div class="text">Degree:</div> {{educations.degree}}
+                    </li>
+                    <li>
+                        <div class="text">College:</div> {{educations.college}}
+                    </li>
+                    <li>
+                        <div class="text">Board or university:</div> {{educations.board_or_university}}
+                    </li>
+                    <li>
+                        <div class="text">Year of passing:</div> {{educations.passing_year}}
+                    </li>
+                    <li>
+
+
+            </div>
+            {% endfor %}
+        </div>
+        <div class="projects">
+            <h2>Projects</h2>
+            <div class="projects-main">
+                {% for project in projects %}
+                <div class="projects-element1">
+                    <ul>
+
+                        <li>
+                            <div class="text">Project Name:</div> {{project.name}}
+                        </li>
+                        <li>
+                            <div class="text">Description::</div> {{project.description}}
+                        </li>
+                        <li>
+                            <div class="text">Start Date:</div> {{project.start_date}}
+                        </li>
+                        <li>
+                            <div class="text">Currenty working:</div> {{project.currently_working}}
+                        </li>
+                        <li>
+                            <div class="text">End Date:</div> {{project.end_date}}
+                        </li>
+                        <li>
+                            <div class="text">Git Link:</div> {{project.Gitlink}}
+                        </li>
+                        <li>
+                            <div class="text">Link2:</div> {{project.link}}
+                        </li>
+
+                    </ul>
+                </div>
+                {% endfor %}
+
+
+            </div>
+            <div class="contacts">
+                <h2>Contacts </h2>
+                <div class="contacts-main">
+                    <div class="contacts-element1">
+                        <ul>
+                            {% for link in links %}
+                            <li>
+                                <div class="text">{{link.name}}:</div>
+                                <a href="{{link.link}}" target="_blank">{{link.link}}</a>
+                            </li>
+                            {% endfor %}
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="achievement">
+                <h2>Achievements </h2>
+                <div class="achievement-main">
+                    {% for achievement in achievements %}
+                    <div class="achievement-element1">
+                        <ul>
+                            <li>
+                                <div class="text">Title:</div> {{ achievement.text }}
+                            </li>
+                            <li>
+                                <div class="text">Start Date:</div> {{ achievement.date }}
+                            </li>
+                            <li>
+                                <div class="text">Institute:</div> {{ achievement.Institution }}
+                            </li>
+                        </ul>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+
+            </div>
+            <!-- Footer Start -->
+<div class="candidate_status">
+   <!-- candidate_profile.html -->
+<!-- <form action="" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Status</button>
+</form> -->
+
+    <div>
+        
+    </div>
+    
+</div>
+        </div>
+        <!-- Footer End -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../static/lib/wow/wow.min.js"></script>
+        <script src="..static/lib/easing/easing.min.js"></script>
+        <script src="..static/lib/waypoints/waypoints.min.js"></script>
+        <script src="..static/lib/owlcarousel/owl.carousel.min.js"></script>
+        <!-- Template Javascript -->
+        <script src="../static/js/main.js"></script>
+        {% endblock %}

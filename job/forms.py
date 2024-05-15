@@ -54,7 +54,7 @@ class ApplyForm(forms.ModelForm):
 class ApplicantProfileForm(forms.ModelForm):
     class Meta:
         model = ApplicantProfile
-        exclude = ['user','is_recruiter','is_applicant']
+        exclude = ['is_recruiter','is_applicant']
 
 class EducationForm(forms.ModelForm):
     class Meta:

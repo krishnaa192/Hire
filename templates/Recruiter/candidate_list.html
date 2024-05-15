@@ -1,52 +1,34 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>Hire</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-     <meta content="" name="keywords">
-    <meta content="" name="description"> 
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
-    <!-- Google Web Fonts -->
+    <!-- External Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Inter:wght@700;800&display=swap"
         rel="stylesheet">
 
-    <!-- Icon Font Stylesheet -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <!-- Icon Font Stylesheets -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Libraries Stylesheet -->
-    <!-- <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
-    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet"> -->
-
-    <!-- Customized Bootstrap Stylesheet -->
-  <!-- <link href="{% static 'style/bootstrap.min.css' %}" rel="stylesheet"> -->
-
-
-    <!-- Template Stylesheet -->
-    <link href="{% static 'style/style.css'%}" rel="stylesheet">
-
+    <!-- Internal Static Files -->
+    <link href="{% static 'lib/animate/animate.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style/style.css' %}">
     <link rel="stylesheet" href="{% static 'style/Recruiter/list.css' %}">
 </head>
 
 <body>
-    {% include 'Recruiter/recheaders.html' %}
-    
-    <!-- header -->
+   
 
-
-    <!-- job description -->
     <div class="job">
         <div class="job-desc">
             <div class="job-title">
@@ -54,284 +36,117 @@
                 <div class="job-intro">
                     <ul>
                         <li>
-                            Job Type :<span>Full Time</span>
+                            Job Type :<span>{{ job.job_type }}</span>
                         </li>
                         <li>
-                            Role :<span>Software Developer</span>
+                            Role :<span>{{ job.title }}</span>
                         </li>
                         <li>
-                            Experience Required :<span>2 years</span>
+                            Experience Required :<span>{{ job.experience }}</span>
                         </li>
                         <li>
-                            No of applicants: <span>10</span>
+                            No of applicants: <span>{{ c_len }}</span>
+                        </li> <!-- Correctly close the `ul` tag -->
                     </ul>
                 </div>
                 <div class="job-detail">
                     <ul>
                         <li>
-                            Job Description Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum explicabo
-                            ducimus magnam vero expedita quaerat tempora repudiandae impedit. Nihil, debitis illo. Ad at
-                            aliquid in praesentium beatae qui, nostrum eligendi!
+                            Job Description :<span>{{ job.description }}</span>
                         </li>
                     </ul>
                 </div>
                 <div class="job-detail-btn">
-                    <button>Full Description</button>
+                    <button><a style="color: #eee;" href="{% url 'job_detail' job.pk %}">See Job</a></button>
                 </div>
             </div>
         </div>
-        <!-- search name -->
+        
         <div class="search-box">
             <div class="search">
-                <input type="text" placeholder="Search by name">
-                <button> <i class="fas fa-solid fa-search"></i> </button>
+                <form action="" method="GET">
+                    <input type="text" placeholder="Search by name" name="search" value="{{ search }}">
+                    <button type="submit"> <i class="fas fa-solid fa-search"></i> </button>
+                </form>
             </div>
             <div class="sort">
-                <select name="" id="">
-                    <option value="">Sort By</option>
-                    <option value="">Name</option>
-                    <option value="">Experience</option>
-                    <option value="">Role</option>
-                </select>
+                <form action="" method="GET">
+                    <select name="sort">
+                        <option value="">Sort By</option>
+                        <option value="name" {% if sort == 'name' %} selected {% endif %}>Name</option>
+                        <option value="experience" {% if sort == 'experience' %} selected {% endif %}>Experience</option>
+                    </select>
+                    <button type="submit">Sort</button>
+                </form>
             </div>
         </div>
 
         <div class="sheet">
             <div class="sheet-column">
                 <ul>
-                    <li>
-                        Name
-                    </li>
-                    <li>
-                        Email
-                    </li>
-                    <li>
-                        Experience(in years)
-                    </li>
-                    <li>
-                        Role
-                    </li>
-                    <li>
-                        Skills
-                    </li>
-                    <li>
-                        Resume
-                    </li>
-                    <li>
-                        Message
-                    </li>
-                </ul>
-
-            </div>
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href="">Pragya Pandey</a>
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        4
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <a href=""><i class=" fas fa-regular fa-file"></i></a>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href="">Nikky Yadav</a>
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        2
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <i class=" fas fa-regular fa-file"> <a href=""></a></i>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
-                    </ul>
-            </div>
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href="">Lakshmi S</a>
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        1
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <i class="fas   fa-regular fa-file"> <a href=""></a></i>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
-                    </ul>
-            </div>
-
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href=""> Krishna Upadhyay</a>
-
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        5
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <i class="fas fa-regular fa-file"> <a href=""></a></i>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href="">Utkarsh Dixit</a>
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        3
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-file"> </i></a>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href="">Kishan Viswakarama</a>
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        0
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-file"> </i></a>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
-                </ul>
-            </div>
-            <div class="user-data-i">
-                <ul>
-                    <li>
-                        <a href="">Amyaa Verma</a>
-                    </li>
-                    <li>
-                        Krishna@gmail.com
-                    </li>
-                    <li>
-                        2
-                    </li>
-                    <li>
-                        Sodtware Developer
-                    </li>
-                    <li>
-                        Django,Python,HTML,CSS
-                    </li>
-                    <li>
-                        <i class="fas fa-regular fa-file"> <a href=""></a></i>
-                    </li>
-                    <li>
-                        <a href=""><i class="fas fa-regular fa-envelope"></i></a>
-                    </li>
+                    <li>Name</li>
+                    <li>Email</li>
+                    <li>Experience (in years)</li>
+                    <li>Role</li>
+                    <li>Skills</li>
+                    <li>Resume</li>
+                    <li>Message</li>
                 </ul>
             </div>
 
+            <div class="user-data-i">
+                {% for candidate in candidate_profiles %}
+                <ul>
+                    <li><a href="{% url 'candidate_profile' username=candidate.user.name %}">{{ candidate.user.name }}</a></li>
+                    <li>{{ candidate.user.email }}</li>
+                    <li>{% if candidate.experience == 0 %}Fresher{% else %}{{ candidate.experience }}{% endif %}</li>
+                    <li>{{ job.title }}</li>
+                    <li>{% for skill in candidate.skills.all %}{{ skill }}{% endfor %}</li>
+                    <li>
+                        <a href="{{ candidate.resume.url }}" target="_blank">
+                            <i class="fas fa-file"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:{{ candidate.user.email }}?subject=Regarding%20Job%20Application">
+                            <i class="fas fa-envelope"></i>
+                        </a>
+                    </li>
+                </ul>
+                {% endfor %}
+            </div>
         </div>
     </div>
-    <div class="action-button">
-        <button> <a href="">Download</a> </button>
-        <button> <a href=""> Share </a> </button>
-    </div>
+
     <div class="pagination">
         <ul>
-            <li>
-                <a href=""> <i class="fas fa-solid fa-chevron-left"></i> </a>
-            </li>
-            <li>
-                <a href="">1</a>
-            </li>
-            <li>
-                <a href="">2</a>
-            </li>
-            <li>
-                <a href="">3</a>
-            </li>
-            <li>
-                <a href="">4</a>
-            </li>
-            <li>
-                <a href="">5</a>
-            </li>
-            <li>
-                <a href=""> <i class=" fas fa-solid fa-chevron-right"></i> </a>
-            </li>
+            {% if candidate_profiles.has_previous %}
+                <li>
+                    <a href="?page={{ candidate_profiles.previous_page_number }}"> <i class="fas fa-chevron-left"></i> </a>
+                </li>
+            {% endif %}
+            
+            {% for num in candidate_profiles.paginator.page_range %}
+                <li class="{% if num == candidate_profiles.number %}active{% endif %}">
+                    <a href="?page={{ num }}">{{ num }}</a>
+                </li>
+            {% endfor %}
+            
+            {% if candidate_profiles.has_next %}
+                <li>
+                    <a href="?page={{ candidate_profiles.next_page_number }}"> <i class="fas fa-chevron-right"></i> </a>
+                </li>
+            {% endif %}
         </ul>
     </div>
-</body>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../static/lib/wow/wow.min.js"></script>
+    <script src="../static/lib/easing/easing.min.js"></script>
+    <script src="../static/lib/waypoints/waypoints.min.js"></script>
+    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
 
+    <!-- Template Javascript -->
+    <script src="../static/js/main.js"></script>
+</body>
 </html>

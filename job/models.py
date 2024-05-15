@@ -45,6 +45,11 @@ class ApplicantProfile(models.Model):
     state=models.CharField(max_length=100,blank=True,null=True)
 
 
+    # how assign name from profile model
+    
+
+
+
     def __str__(self):
         return self.user.name
 
@@ -144,7 +149,7 @@ class Skill(models.Model):
         ('moderate','moderate'),
         ('advanced','advanced'),
     ]
-    profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True)
+    profile = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE ,null=True,related_name='skills')
     name = models.CharField(max_length=100)
    
 
@@ -176,7 +181,7 @@ class Apply(models.Model):
         ('Resume Shortlisted','Resume Shortlisted')
     ]
     id=models.AutoField(primary_key=True)
-    candidate_detail = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE,null=True)
+    candidate_detail = models.ForeignKey(ApplicantProfile, on_delete=models.CASCADE,null=True,related_name='candidate_detail')
     recruiter_detail = models.ForeignKey(Recruiter, on_delete=models.CASCADE,null=True)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
     about = models.TextField(help_text="Why should we hire you")
@@ -262,3 +267,6 @@ class SaveJob(models.Model):
 
     def __str__(self):
         return self.candidate_detail.user.name+" saved "+self.job.title
+    
+
+

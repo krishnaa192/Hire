@@ -22,3 +22,8 @@ class JobForm(forms.ModelForm):
     class Meta:
         model = Job
         exclude = ['recruiter']
+
+class JobStatus(forms.ModelForm):
+    class Meta:
+        model = Apply
+        fields = ['job_status']

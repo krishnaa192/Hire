@@ -2,8 +2,7 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('header/', views.header, name='header'),
@@ -14,11 +13,11 @@ urlpatterns = [
     path('login/', views.candidate_login, name='login'),
     path('jobs/', views.job_list, name='jobs'),
     path('logout/', views.logoutUser, name='logout'),
-    path('candidate_profile/', views.candidate_profile, name='candidate_profile'),
+
     # path('save_job/<str:pk>/', views.save_job, name='save_job'),
     
    
-    path('job_detail/<str:pk>/', views.job_detail, name='job_detail'),
+    path('job_detail/<int:pk>/', views.job_detail, name='job_detail'),
     path('apply_job/<str:pk>/', views.apply_job, name='apply_job'),
     path('about/', views.about, name='about'),
     path('user/', views.user_profile, name='user_profile'),
@@ -47,5 +46,3 @@ urlpatterns = [
     path('saved_jobs/', views.saved_job, name='saved_jobs'),
 
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
