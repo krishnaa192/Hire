@@ -38,10 +38,7 @@ urlpatterns = [
     path('deleteLink/<int:pk>/', views.deleteLink, name='delete_link'),
     #category endpoints
     path('jobs/category/<str:cat>/', views.category, name='web_dev'),
-    path('inbox/', views.inbox, name='inbox'),
-    path('send/<int:pk>/',views.SendMessage,name='send'),
-    path('inbox/msg/<int:pk>/',views.view_msg ,name='view-msg'),
-    path('job/application/<int:pk>/',views.see_application ,name='see-application'),
+    path('job/application/<int:id>/',views.see_application ,name='see-application'),
     path('save_job/<int:pk>/', views.save_job, name='save_job'),
     path('saved_jobs/', views.saved_job, name='saved_jobs'),
 

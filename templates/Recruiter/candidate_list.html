@@ -3,10 +3,8 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Hire</title>
+    <title>{{job.title}}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <!-- Favicon -->
     <link href="{% static 'img/favicon.ico' %}" rel="icon">
 
     <!-- External Fonts -->
@@ -28,19 +26,17 @@
 
 <body>
    
-
+    {% include 'Recruiter/recheaders.html' %}
     <div class="job">
         <div class="job-desc">
             <div class="job-title">
-                <h1>Job Title</h1>
+                <h1>{{ job.title }}</h1>
                 <div class="job-intro">
                     <ul>
                         <li>
                             Job Type :<span>{{ job.job_type }}</span>
                         </li>
-                        <li>
-                            Role :<span>{{ job.title }}</span>
-                        </li>
+                        
                         <li>
                             Experience Required :<span>{{ job.experience }}</span>
                         </li>
@@ -139,14 +135,15 @@
             {% endif %}
         </ul>
     </div>
+   
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../static/lib/wow/wow.min.js"></script>
-    <script src="../static/lib/easing/easing.min.js"></script>
-    <script src="../static/lib/waypoints/waypoints.min.js"></script>
-    <script src="../static/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="{% static 'lib/wow/wow.min.js' %}"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
 
     <!-- Template Javascript -->
-    <script src="../static/js/main.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>

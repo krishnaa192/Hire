@@ -88,9 +88,3 @@ class ExperienceForm(forms.ModelForm):
     class Meta:
         model = Experience
         exclude = ['profile']
-
-class SendMessageForm(forms.ModelForm):
-    class Meta:
-        model = Message
-        fields = [ 'receiver', 'subject', 'message']
-        

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
 from .forms import*
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
@@ -11,13 +11,14 @@ from django.core.mail import send_mail
 from .decoratore import is_recruiter,is_applicant
 from django.core.paginator import Paginator
 from .utils import *
+from recruiter.models import *
+
 
 def header(request):
     user=request.user
     applicant=ApplicantProfile.objects.get(user=user.id)
     context={'applicant':applicant}
     return render(request,'header.html',context)
-
 
 def profile(request):
     profile = request.user
@@ -391,60 +392,17 @@ def category(request,cat):
     context={'cat_job':cat_job,'cats':cats,'applicant':applicant,'page':page}
     return render(request,'categories.html',context) 
 
+def see_application(request, id):
+    # Fetching the current user's profile
+    profile = get_object_or_404(Profile, user=request.user)
 
-@login_required(login_url='login')
-def inbox(request):
-     user=request.user
-     profile=request.user.profile
-     messagesent=Message.objects.filter(receiver=profile)
-     applicant=ApplicantProfile.objects.get(user=user.id)
-     unreadmessages=messagesent.filter(is_read=False)
-     count=unreadmessages.count()
-     context={'messagesent':messagesent,'profile':profile,'count':count,'applicant':applicant}
-     return render(request,'message.html',context)
+    # Fetching the applicant profile based on the current user's profile
+    applicant = get_object_or_404(ApplicantProfile, user=profile)
 
-
-def SendMessage(request,pk):
-    profile=request.user.profile
-    receiver=Profile.objects.get(pk=pk)
-    messagesent=Message.objects.filter(receiver=profile)
-    form=SendMessageForm()
-    if request.method=='POST':
-        form=SendMessageForm(request.POST)
-        if form.is_valid():
-            message=form.save(commit=False)
-            message.sender=profile
-            message.save()
-            return redirect('/')
-    context={'form':form,'receiver':receiver,'profile':profile,'messagesent':messagesent}
-    return render(request,'sent.html',context)
-
-
-def view_msg(request,pk):
-    profile=request.user.profile
-    receiver=Profile.objects.get(pk=pk)
-    messagesent=Message.objects.filter(receiver=profile)
-    form=SendMessageForm()
-    if request.method=='POST':
-        form=SendMessageForm(request.POST)
-        if form.is_valid():
-            message=form.save(commit=False)
-            message.sender=profile
-            message.save()
-            return redirect('/')
-    context={'form':form,'receiver':receiver,'profile':profile,'messagesent':messagesent}
-    return render(request,'usermsg.html',context)
-
-#see application
-
-def see_application(request,pk):
-    user=request.user
-    profile=request.user.profile
-    applicant=ApplicantProfile.objects.get(user=user.id)
-    applied=Apply.objects.get(id=pk,candidate_detail=applicant)
-    # applied = Apply.objects.filter(id=pk, candidate_detail=applicant).first()
-
-    return render(request,'seeapplication.html',{'applied':applied,'profile':profile,'applicant':applicant})
+    # Fetching the applied application based on the provided id and applicant profile
+    applied = get_object_or_404(Apply, id=id, candidate_detail=applicant)
+    
+    return render(request, 'seeapplication.html', {'applied': applied, 'profile': profile, 'applicant': applicant})
   
 
 

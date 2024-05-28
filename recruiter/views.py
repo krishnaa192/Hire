@@ -1,6 +1,8 @@
 
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.http import HttpResponseForbidden
 from .forms import*
+from .models import *
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect,get_object_or_404
@@ -77,13 +79,15 @@ def recruiter_profile(request):
 
 
 def profile(request,username):
-    user=request.user
-    profile = Profile.objects.get(user=user,name=username)
+    if username != request.user.username:
+        return HttpResponseForbidden("You are not allowed to view this profile.")
+    user = get_object_or_404(User, username=username)
+    profile = Profile.objects.get(user=user)
     recruiter=Recruiter.objects.get(user=profile)
+
     context={
         'profile':profile,'recruiter':recruiter
     }
-    print(username)
     return render(request,'Recruiter/rec_profile.html',context)
 
 @is_recruiter
@@ -141,6 +145,9 @@ def candidate_list(request,id):
         # Assuming 'experience' refers to the 'experience' field in ApplicantProfile model
         candidate_profiles = candidate_profiles.order_by('-experience')
 
+    
+    
+   
     return render(request,'Recruiter/candidate_list.html',{'job':job,'recruiter':recruiter,'profile':profile,'candidates':candidates,'c_len':c_len,'candidate_profiles':candidate_profiles,'can_skill':can_skill,'candidate_profiles_paginated':candidate_profiles_paginated,'total_candidates':total_candidates,'candidate_skills':candidate_skills})
 
 @is_recruiter
@@ -211,3 +218,17 @@ def send_email(request):
             return HttpResponse('Email address not provided')
     else:
         return HttpResponse('Invalid request method')
+
+
+
+def Job_status(request,id):
+    form=JobStatus(request.POST or None)
+    if form.is_valid():
+        form.save()
+        return redirect('candidate_list')
+    
+    return redirect('Recruiter/chnge_status.html',{'form':form})
+
+
+
+

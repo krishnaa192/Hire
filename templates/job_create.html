@@ -1,4 +1,3 @@
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -7,34 +6,32 @@
     <meta charset="utf-8">
     <title>Hire</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <meta content="" name="keywords">
     <meta content="" name="description">
 
     <!-- Favicon -->
     <link href="img/favicon.ico" rel="icon">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-<!-- Bootstrap CSS -->
-<!-- Include jQuery -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Include Bootstrap Datepicker CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <!-- Include Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-<!-- Include Bootstrap Datepicker JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <!-- Include Bootstrap Datepicker JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-<!-- Bootstrap Datepicker CSS -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <!-- Bootstrap Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
 
-<!-- Bootstrap JavaScript (optional if you're already using it) -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Bootstrap JavaScript (optional if you're already using it) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<!-- Bootstrap Datepicker JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
+    <!-- Bootstrap Datepicker JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -57,124 +54,139 @@
     <link href="{% static 'style/style.css'%}" rel="stylesheet">
     <link href="{% static 'style/style.css'%}" rel="stylesheet">
     <link href="{% static 'style/forms.css'%}" rel="stylesheet">
-
-
 </head>
+
 <body>
 {% include 'Recruiter/recheaders.html' %}
 
-
 <div class="form-container">
-    <form method="post" enctype="multipart/form-data">
-      <div class="form-stage">
-        <div class="form-content">
-          <!-- Step 1: Personal Information -->
-          <div class="form-group">
-            {{ form.title.errors }}
-            {{ form.title.label_tag }}
-            {{ form.title }}
-          </div>
-          <div class="form-group">
-            {{ form.location.errors }}
-            {{ form.location.label_tag }}
-            {{ form.location }}
-          </div>
-          <div class="form-group">
-            {{ form.deadline.errors }}
-            <label for="id_deadline" class="label">{{ form.deadline.label }}</label>
-            <input type="date" id="id_deadline" name="deadline" class="form-control">
-          </div>
-          
+    <form id="multiStepForm" method="post" enctype="multipart/form-data">
+        <div class="form-stage active">
+            <div class="form-content">
+                <!-- Step 1: Personal Information -->
+                <div class="form-group">
+                    {{ form.title.errors }}
+                    {{ form.title.label_tag }}
+                    {{ form.title }}
+                </div>
+                <div class="form-group">
+                    {{ form.location.errors }}
+                    {{ form.location.label_tag }}
+                    {{ form.location }}
+                </div>
+                <div class="form-group">
+                    {{ form.deadline.errors }}
+                    <label for="id_deadline" class="label">{{ form.deadline.label }}</label>
+                    <input type="date" id="id_deadline" name="deadline" class="form-control">
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="button" class="next-button">Next</button>
+            </div>
         </div>
-        <div class="button-container">
-          <button type="button" class="next-button">Next</button>
-        </div>
-      </div>
-  
-      <div class="form-stage hidden">
-        <div class="form-content">
-          <!-- Step 2: Job Details -->
-          <div class="form-group">
-            {{ form.job_type.errors }}
-            {{ form.job_type.label_tag }}
-            {{ form.job_type }}
-          </div>
-          <div class="form-group">
-            {{ form.salary.errors }}
-            {{ form.salary.label_tag }}
-            {{ form.salary }}
-          </div>
-          <div class="form-group">
-            {{ form.experience.errors }}
-            {{ form.experience.label_tag }}
-            {{ form.experience }}
-          </div>
-        </div>
-        <div class="button-container">
-          <button type="button" class="prev-button">Previous</button>
-          <button type="button" class="next-button">Next</button>
-        </div>
-      </div>
-  
-      <div class="form-stage hidden">
-        <div class="form-content">
-          <!-- Step 3: Job Description -->
-          <div class="form-group">
-            {{ form.description.errors }}
-            {{ form.description.label_tag }}
-            {{ form.description }}
-          </div>
-          <div class="form-group">
-            {{ form.Responsibilities.errors }}
-            {{ form.Responsibilities.label_tag }}
-            {{ form.Responsibilities }}
-          </div>
-          <div class="form-group">
-            {{ form.Qualifications.errors }}
-            {{ form.Qualifications.label_tag }}
-            {{ form.Qualifications }}
-          </div>
-        </div>
-        <div class="button-container">
-          <button type="button" class="prev-button">Previous</button>
-          <button type="submit" class="submit-button">Submit</button>
-        </div>
-      </div>
-      {% csrf_token %}
-    </form>
-  </div>
-  
-  
-{% include 'footer.html'%}
-</body>
 
-<!-- add javascript -->
+        <div class="form-stage hidden">
+            <div class="form-content">
+                <!-- Step 2: Job Details -->
+                <div class="form-group">
+                    {{ form.job_type.errors }}
+                    {{ form.job_type.label_tag }}
+                    {{ form.job_type }}
+                </div>
+                <div class="form-group">
+                    {{ form.salary.errors }}
+                    {{ form.salary.label_tag }}
+                    {{ form.salary }}
+                </div>
+                <div class="form-group">
+                    {{ form.experience.errors }}
+                    {{ form.experience.label_tag }}
+                    {{ form.experience }}
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="button" class="prev-button">Previous</button>
+                <button type="button" class="next-button">Next</button>
+            </div>
+        </div>
+
+        <div class="form-stage hidden">
+            <div class="form-content">
+                <!-- Step 3: Job Description -->
+                <div class="form-group">
+                    {{ form.description.errors }}
+                    {{ form.description.label_tag }}
+                    {{ form.description }}
+                </div>
+                <div class="form-group">
+                    {{ form.Responsibilities.errors }}
+                    {{ form.Responsibilities.label_tag }}
+                    {{ form.Responsibilities }}
+                </div>
+                <div class="form-group">
+                    {{ form.Qualifications.errors }}
+                    {{ form.Qualifications.label_tag }}
+                    {{ form.Qualifications }}
+                </div>
+            </div>
+            <div class="button-container">
+                <button type="button" class="prev-button">Previous</button>
+                <button type="submit" class="submit-button">Submit</button>
+            </div>
+        </div>
+        {% csrf_token %}
+    </form>
+</div>
+
+{% include 'footer.html'%}
+
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-  const nextButtons = document.querySelectorAll('.next-button');
-  const prevButtons = document.querySelectorAll('.prev-button');
-  const formStages = document.querySelectorAll('.form-stage');
+        const nextButtons = document.querySelectorAll('.next-button');
+        const prevButtons = document.querySelectorAll('.prev-button');
+        const formStages = document.querySelectorAll('.form-stage');
+        const form = document.getElementById('multiStepForm');
 
-  let currentStage = 0;
-  formStages[currentStage].classList.add('active');
+        let currentStage = 0;
 
-  nextButtons.forEach((button) => {
-    button.addEventListener('click', function () {
-      formStages[currentStage].classList.remove('active');
-      currentStage++;
-      formStages[currentStage].classList.add('active');
+        function showStage(index) {
+            formStages.forEach((stage, idx) => {
+                stage.classList.toggle('active', idx === index);
+                stage.classList.toggle('hidden', idx !== index);
+            });
+        }
+
+        showStage(currentStage);
+
+        nextButtons.forEach((button) => {
+            button.addEventListener('click', function () {
+                if (currentStage < formStages.length - 1) {
+                    currentStage++;
+                    showStage(currentStage);
+                }
+            });
+        });
+
+        prevButtons.forEach((button) => {
+            button.addEventListener('click', function () {
+                if (currentStage > 0) {
+                    currentStage--;
+                    showStage(currentStage);
+                }
+            });
+        });
+
+        form.addEventListener('submit', function (e) {
+            if (currentStage < formStages.length - 1) {
+                e.preventDefault();
+                currentStage++;
+                showStage(currentStage);
+            } else {
+                // Ensure that the submit button works only when on the last stage
+                form.submit();
+            }
+        });
     });
-  });
-
-  prevButtons.forEach((button) => {
-    button.addEventListener('click', function () {
-      formStages[currentStage].classList.remove('active');
-      currentStage--;
-      formStages[currentStage].classList.add('active');
-    });
-  });
-});
-
 </script>
-
+</body>
 </html>

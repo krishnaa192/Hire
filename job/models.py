@@ -53,6 +53,14 @@ class ApplicantProfile(models.Model):
     def __str__(self):
         return self.user.name
 
+
+
+
+
+
+
+
+
 class Recruiter(models.Model):
     #grade c:3lpa to 7lpa and for internship 4k to 12k
     #grade b:7lpa to 18lpa and for internship 12k to 40k
@@ -73,11 +81,13 @@ class Recruiter(models.Model):
     company_address = models.CharField(max_length=100)
     company_website = models.CharField(max_length=100)
     company_email = models.CharField(max_length=100)
-    recruting_face=models.CharField(max_length=100)
     grade=models.CharField(max_length=100,choices=grade)
 
     def __str__(self):
         return self.company_name
+
+
+
 
 
 class Job_category(models.Model):

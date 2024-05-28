@@ -17,5 +17,6 @@ urlpatterns = [
     path('profile/<str:username>/', views.profile, name="rec_profile"),
     path('candidate_profile/<str:username>/', views.candidate_profile, name='candidate_profile'),
     path('send-email/',views.send_email,name='send_email'),
+
     
 ]
