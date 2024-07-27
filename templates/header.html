@@ -58,9 +58,8 @@
                     <div class="nav-item dropdown">
                         <img src="{{applicant.profile_pic.url}}" alt="Profile Image" class="profile-image">
                         <div class="dropdown-menu">
-                            <a href="{% url 'user_profile' %}" class="dropdown-item"> Profile </a>
+                            <a href="{% url 'user_profile' username=user.username %}" class="dropdown-item"> Profile </a>
                             <a href="{% url 'setting' %}" class="dropdown-item">Applied Jobs</a>
-                            <a href="{% url 'saved_jobs' %}" class="dropdown-item">Saved Jobs</a>
                             <a href="{% url 'logout' %}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>

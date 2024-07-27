@@ -333,9 +333,7 @@ body {
     background: var(--dark);
     border-color: var(--primary);
 }
-.footer{
-    margin-right:  10rem  !important;
-}
+
 
 
 /*** Footer ***/
@@ -428,7 +426,7 @@ body {
 .dropdown-menu {
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 10% !important;
     display: none;
     background-color: #f1f1f1;
     min-width: 160px;

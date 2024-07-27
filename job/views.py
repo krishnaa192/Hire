@@ -170,17 +170,18 @@ def job_list(request):
     return render(request, 'job-list.html', context)
 
 @is_applicant
-def user_profile(request):
+def user_profile(request,username):
     user=request.user
-    applicant=ApplicantProfile.objects.get(user=user.id)
+    username=user.username
     profile=Profile.objects.get(user=user.id)
+    applicant=ApplicantProfile.objects.get(user=profile)
     candidate=ApplicantProfile.objects.get(user=profile)
     achievements=achievement.objects.filter(userprofile=applicant.id)
     skill=Skill.objects.filter(profile=applicant.id)
     education=Education.objects.filter(profile=applicant.id)
     project=Project.objects.filter(profile=applicant.id)
     link=addLink.objects.filter(profile=applicant.id)
-    context={'profile':profile,'candidate':candidate,'applicant':applicant,'skill':skill,'education':education,'project':project,'link':link,'achievements':achievements}
+    context={'profile':profile,'candidate':candidate,'applicant':applicant,'skill':skill,'education':education,'project':project,'link':link,'achievements':achievements,'username':username}
     return render(request,'profilepage.html',context)
 
 
@@ -409,7 +410,7 @@ def see_application(request, id):
 def save_job(request,pk):
     user=request.user
     profile=request.user.profile
-    applicant=ApplicantProfile.objects.get(user=user.id)
+    applicant=ApplicantProfile.objects.get(user=profile)
     job=Job.objects.get(id=pk)
     if SaveJob.objects.filter(job=job,candidate_detail=applicant).exists():
         return redirect('home')
@@ -421,7 +422,7 @@ def save_job(request,pk):
 def saved_job(request):
     user=request.user
     profile=request.user.profile
-    applicant=ApplicantProfile.objects.get(user=user.id)
+    applicant=ApplicantProfile.objects.get(user=profile)
     saved=SaveJob.objects.filter(candidate_detail=applicant)
     context={'saved':saved,'profile':profile,'applicant':applicant}
     return render(request,'savedjob.html',context)
