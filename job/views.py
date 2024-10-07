@@ -84,18 +84,20 @@ def logoutUser(request):
 
 def job_detail(request, pk):
     job = Job.objects.get(id=pk)
-    applicant=ApplicantProfile.objects.get(user=request.user.id)
+    profile=request.user.profile
+    applicant=ApplicantProfile.objects.get(user=profile)
     context = {'job': job,'applicant':applicant}
     return render(request, 'job-detail.html', context)
 
 @login_required(login_url='login')
 def apply_job(request, pk):
-    user = request.user
-    applicant=ApplicantProfile.objects.get(user=user.id)
+    profile=request.user.profile
+
+    applicant=ApplicantProfile.objects.get(user=profile)
     #check whter user is appplied for a job or not
     if Apply.objects.filter(candidate_detail=applicant,job=pk).exists():
         return redirect('home')
-    profile=Profile.objects.get(user=user.id)
+    profile=Profile.objects.get(user=request.user)
     job = Job.objects.get(pk=pk)
     #getting logged in user profile of candidate
     candidate=ApplicantProfile.objects.get(user=profile)
